@@ -1,0 +1,24 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.AttachToProcess" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PrefabItem.cs">
+    <Files>
+      <File FileName="Assets/Scripts/BuildingArea.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Line.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Roof.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UpperWallFace.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item.cs" Line="1" Column="1" />
+      <File FileName="Assets/PrefabItem.cs" Line="19" Column="4" />
+      <File FileName="Assets/Scripts/ItemsManager.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/Mofed/EnvEditor/Assets/Scripts/UpperWallFace.cs" line="565" column="10" />
+      <Breakpoint file="/Users/Mofed/EnvEditor/Assets/Scripts/Line.cs" line="1268" column="10" />
+      <Breakpoint conditionExpression="eeee &gt; 1000" file="/Users/Mofed/EnvEditor/Assets/Scripts/Line.cs" line="1080" column="1" />
+      <Breakpoint file="/Users/Mofed/EnvEditor/Assets/Scripts/BuildingArea.cs" line="671" column="1" />
+      <Breakpoint file="/Users/Mofed/EnvEditor/Assets/Scripts/BuildingArea.cs" line="869" column="14" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

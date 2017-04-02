@@ -1,0 +1,1739 @@
+fileFormatVersion: 2
+guid: bdfe72de0bd10194ca7794a1ee8eacac
+timeCreated: 1472413632
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: button_0_0_red
+    21300002: button_0_1_violet
+    21300004: button_0_2_yellow
+    21300006: button_0_3_green
+    21300008: button_0_4_blue
+    21300010: button_0_5_red
+    21300012: button_0_6_violet
+    21300014: button_0_7_yellow
+    21300016: button_0_8_green
+    21300018: button_0_9_blue
+    21300020: button_0_10_red
+    21300022: button_0_11_violet
+    21300024: button_0_12_yellow
+    21300026: button_0_13_green
+    21300028: button_0_14_blue
+    21300030: button_0_15_red
+    21300032: button_0_16_violet
+    21300034: button_0_17_yellow
+    21300036: button_0_18_green
+    21300038: button_0_19_blue
+    21300040: button_0_20_red
+    21300042: _violet
+    21300044: button_0_22_yellow
+    21300046: button_0_23_green
+    21300048: button_0_24_blue
+    21300050: button_0_25_red
+    21300052: button_0_26_violet
+    21300054: button_0_27_yellow
+    21300056: button_0_28_green
+    21300058: button_0_29_blue
+    21300060: button_0_30_red
+    21300062: button_0_31_violet
+    21300064: button_0_32_yellow
+    21300066: button_0_33_green
+    21300068: button_0_34_blue
+    21300070: button_0_35_red
+    21300072: button_0_36_violet
+    21300074: button_0_37_yellow
+    21300076: button_0_38_green
+    21300078: button_0_39_blue
+    21300080: button_0_40_red
+    21300082: button_0_41_violet
+    21300084: button_0_42_yellow
+    21300086: button_0_43_green
+    21300088: button_0_44_blue
+    21300090: button_0_45_red
+    21300092: button_0_46_violet
+    21300094: button_0_47_yellow
+    21300096: button_0_48_green
+    21300098: button_0_49_blue
+    21300100: button_0_50_red
+    21300102: button_0_51_violet
+    21300104: button_0_52_yellow
+    21300106: button_0_53_green
+    21300108: button_0_54_blue
+    21300110: button_0_55_red
+    21300112: button_0_56_violet
+    21300114: button_0_57_yellow
+    21300116: button_0_58_green
+    21300118: button_0_59_blue
+    21300120: button_0_60_red
+    21300122: button_0_61_violet
+    21300124: button_0_62_yellow
+    21300126: button_0_63_green
+    21300128: button_0_64_blue
+    21300130: button_0_65_red
+    21300132: button_0_66_violet
+    21300134: button_0_67_yellow
+    21300136: button_0_68_green
+    21300138: button_0_69_blue
+    21300140: button_0_70_red
+    21300142: button_0_71_violet
+    21300144: button_0_72_yellow
+    21300146: button_0_73_green
+    21300148: button_0_74_blue
+    21300150: button_0_75_red
+    21300152: button_0_76_violet
+    21300154: button_0_77_yellow
+    21300156: button_0_78_green
+    21300158: button_0_79_blue
+    21300160: button_0_80_red
+    21300162: button_0_81_violet
+    21300164: button_0_82_yellow
+    21300166: button_0_83_green
+    21300168: button_0_84_blue
+    21300170: button_0_85_red
+    21300172: button_0_86_violet
+    21300174: button_0_87_yellow
+    21300176: button_0_88
+    21300178: button_0_89_blue
+    21300180: button_0_90_red
+    21300182: button_0_91_violet
+    21300184: button_0_92
+    21300186: button_0_93_green
+    21300188: button_0_94_blue
+    21300190: button_0_95_red
+    21300192: button_0_96_violet
+    21300194: button_0_97_yellow
+    21300196: button_0_98_green
+    21300198: button_0_99_blue
+    21300200: button_0_100_red
+    21300202: button_0_101_violet
+    21300204: button_0_102_yellow
+    21300206: button_0_103_green
+    21300208: button_0_104_blue
+    21300210: button_0_105_red
+    21300212: button_0_106_violet
+    21300214: button_0_107_yellow
+    21300216: button_0_108_green
+    21300218: button_0_109_blue
+    21300220: button_0_110_red
+    21300222: button_0_111_violet
+    21300224: button_0_112_yellow
+    21300226: button_0_113_green
+    21300228: button_0_114_blue
+    21300230: button_0_115_red
+    21300232: button_0_116_violet
+    21300234: button_0_117_yellow
+    21300236: button_0_118_green
+    21300238: button_0_119_blue
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: button_0_0_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15581
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_1_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 15581
+        width: 533
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_2_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 15581
+        width: 535
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_3_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 15581
+        width: 535
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_4_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 15581
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_5_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 14905
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_6_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 14905
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_7_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 14905
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_8_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 14905
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_9_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 14905
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_10_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 14229
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_11_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 14229
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_12_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 14229
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_13_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 14229
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_14_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 14229
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_15_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13553
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_16_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 13553
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_17_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 13553
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_18_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 13553
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_19_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 13553
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_20_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12876
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: _violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 12876
+        width: 533
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_22_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 12876
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_23_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 12876
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_24_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 12876
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_25_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12200
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_26_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 12200
+        width: 533
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_27_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 12200
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_28_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 12200
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_29_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 12200
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_30_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11524
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_31_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 11524
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_32_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 11524
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_33_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 11524
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_34_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 11524
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_35_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10848
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_36_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 10848
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_37_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 10848
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_38_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 10848
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_39_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 10848
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_40_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10173
+        width: 523
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_41_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 10173
+        width: 533
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_42_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 10173
+        width: 535
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_43_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 10173
+        width: 535
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_44_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 10173
+        width: 523
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_45_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9503
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_46_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 9503
+        width: 533
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_47_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 9503
+        width: 535
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_48_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 9503
+        width: 535
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_49_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 9503
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_50_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8827
+        width: 523
+        height: 526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_51_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 8827
+        width: 533
+        height: 526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_52_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 8827
+        width: 535
+        height: 526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_53_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 8827
+        width: 535
+        height: 526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_54_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 8827
+        width: 523
+        height: 526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_55_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8150
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_56_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 8150
+        width: 533
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_57_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 8150
+        width: 535
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_58_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 8150
+        width: 535
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_59_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 8150
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_60_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7474
+        width: 523
+        height: 531
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_61_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 7474
+        width: 533
+        height: 531
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_62_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 7474
+        width: 535
+        height: 531
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_63_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 7474
+        width: 535
+        height: 531
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_64_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 7474
+        width: 523
+        height: 531
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_65_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6798
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_66_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 6798
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_67_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 6798
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_68_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 6798
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_69_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 6798
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_70_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6122
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_71_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 6122
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_72_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 6122
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_73_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 6122
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_74_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 6122
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_75_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5445
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_76_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 5445
+        width: 533
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_77_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 5445
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_78_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 5445
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_79_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 5445
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_80_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4769
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_81_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 4769
+        width: 533
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_82_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 4769
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_83_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 4769
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_84_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 4769
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_85_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4093
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_86_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 4093
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_87_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 4093
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_88
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 4093
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_89_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 4093
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_90_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3417
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_91_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 3417
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_92
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 3417
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_93_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 3417
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_94_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 3417
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_95_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2740
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_96_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 2740
+        width: 533
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_97_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 2740
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_98_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 2740
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_99_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 2740
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_100_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2064
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_101_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 2064
+        width: 533
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_102_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 2064
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_103_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 2064
+        width: 535
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_104_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 2064
+        width: 523
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_105_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1388
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_106_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 1388
+        width: 533
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_107_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 1388
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_108_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 1388
+        width: 535
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_109_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 1388
+        width: 523
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_110_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 672
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_111_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 672
+        width: 533
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_112_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 672
+        width: 535
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_113_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 672
+        width: 535
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_114_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 672
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_115_red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_116_violet
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 0
+        width: 533
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_117_yellow
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 0
+        width: 535
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_118_green
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 0
+        width: 535
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_0_119_blue
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 0
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
