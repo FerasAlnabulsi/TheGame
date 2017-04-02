@@ -39,7 +39,7 @@ public class UpperWallFace : MonoBehaviour
 
 		Vector3 infiniteRandomPoint = new Vector3 (Random.value * 10000.0f + 1000.0f, 0.0f, Random.value * 1000.0f + 10000.0f);
 
-		List<Line> segments = new List<Line>();
+		List<Line> segments = new List<Line> ();
 
 		List<Vector3> vbuffer = new List<Vector3> ();
 
@@ -151,124 +151,15 @@ public class UpperWallFace : MonoBehaviour
 
 
 
-		List<Vector3> segmentsWithContour = new List<Vector3> ();
+		List<Vector3> segmentsWithContour = Line.Offsets (segments);
 		// lines, lines offseted, lines offseted backward
-		for (int i = 0; i < segments.Count; i++) {
-
-			Vector3 dir = Vector3.Cross (segments [i].a - segments [i].b, Vector3.up);
-			dir.Normalize ();
-			dir *= segments[i].Thickness / 2.0f;
-
-			segmentsWithContour.Add (segments [i].a);
-			segmentsWithContour.Add (segments [i].b);
-
-			segmentsWithContour.Add (segments [i].a + dir);
-			segmentsWithContour.Add (segments [i].b + dir);
-
-			segmentsWithContour.Add (segments [i].a - dir);
-			segmentsWithContour.Add (segments [i].b - dir);
-		}
 
 		//segments.Clear ();
-		HashSet<Vector3> vertices = new HashSet<Vector3> ();
+		HashSet<Vector3> vertices =	 new HashSet<Vector3> ();
 		HashSet<int> linesContoured = new HashSet<int> ();
 		// loop all lines, find intersection between offsets on the same side, then replace intersection point
-		for (int i = 0; i < segmentsWithContour.Count; i += 6) {
 
-			for (int j = i + 6; j < segmentsWithContour.Count; j += 6) {
-				if (segmentsWithContour [i] == segmentsWithContour [j]) {
-					vertices.Add (segmentsWithContour [i]);
-					Vector3 intersection = Vector3.zero;
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 2], segmentsWithContour [i + 3], segmentsWithContour [j + 4], segmentsWithContour [j + 5])) {
-						if (!linesContoured.Contains (i + 2) || (linesContoured.Contains (i + 2) && (segmentsWithContour [i + 2] - segmentsWithContour [i + 3]).sqrMagnitude > (intersection - segmentsWithContour [i + 3]).sqrMagnitude)) {
-							segmentsWithContour [i + 2] = intersection;
-							linesContoured.Add (i + 2);
-						}
-						if (!linesContoured.Contains (j + 4) || (linesContoured.Contains (j + 4) && (segmentsWithContour [j + 4] - segmentsWithContour [j + 5]).sqrMagnitude > (intersection - segmentsWithContour [j + 5]).sqrMagnitude)) {
-							segmentsWithContour [j + 4] = intersection;
-							linesContoured.Add (j + 4);
-						}
-					}
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 4], segmentsWithContour [i + 5], segmentsWithContour [j + 2], segmentsWithContour [j + 3])) {
-						if (!linesContoured.Contains (i + 4) || (linesContoured.Contains (i + 4) && (segmentsWithContour [i + 4] - segmentsWithContour [i + 5]).sqrMagnitude > (intersection - segmentsWithContour [i + 5]).sqrMagnitude)) {
-							segmentsWithContour [i + 4] = intersection;
-							linesContoured.Add (i + 4);
-						}
-						if (!linesContoured.Contains (j + 2) || (linesContoured.Contains (j + 2) && (segmentsWithContour [j + 2] - segmentsWithContour [j + 3]).sqrMagnitude > (intersection - segmentsWithContour [j + 3]).sqrMagnitude)) {
-							segmentsWithContour [j + 2] = intersection;
-							linesContoured.Add (j + 2);
-						}
-					}
-				} else if (segmentsWithContour [i + 1] == segmentsWithContour [j]) {
-					vertices.Add (segmentsWithContour [i + 1]);
-					Vector3 intersection = Vector3.zero;
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 2], segmentsWithContour [i + 3], segmentsWithContour [j + 2], segmentsWithContour [j + 3])) {
-						if (!linesContoured.Contains (i + 3) || (linesContoured.Contains (i + 3) && (segmentsWithContour [i + 3] - segmentsWithContour [i + 2]).sqrMagnitude > (intersection - segmentsWithContour [i + 2]).sqrMagnitude)) {
-							segmentsWithContour [i + 3] = intersection;
-							linesContoured.Add (i + 3);
-						}
-						if (!linesContoured.Contains (j + 2) || (linesContoured.Contains (j + 2) && (segmentsWithContour [j + 2] - segmentsWithContour [j + 3]).sqrMagnitude > (intersection - segmentsWithContour [j + 3]).sqrMagnitude)) {
-							segmentsWithContour [j + 2] = intersection;
-							linesContoured.Add (j + 2);
-						}
-					}
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 4], segmentsWithContour [i + 5], segmentsWithContour [j + 4], segmentsWithContour [j + 5])) {
-						if (!linesContoured.Contains (i + 5) || (linesContoured.Contains (i + 5) && (segmentsWithContour [i + 5] - segmentsWithContour [i + 4]).sqrMagnitude > (intersection - segmentsWithContour [i + 4]).sqrMagnitude)) {
-							segmentsWithContour [i + 5] = intersection;
-							linesContoured.Add (i + 5);
-						}
-						if (!linesContoured.Contains (j + 4) || (linesContoured.Contains (j + 4) && (segmentsWithContour [j + 4] - segmentsWithContour [j + 5]).sqrMagnitude > (intersection - segmentsWithContour [j + 5]).sqrMagnitude)) {
-							segmentsWithContour [j + 4] = intersection;
-							linesContoured.Add (j + 4);
-						}
-					}
-				} else if (segmentsWithContour [i] == segmentsWithContour [j + 1]) {
-					vertices.Add (segmentsWithContour [i]);
-					Vector3 intersection = Vector3.zero;
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 2], segmentsWithContour [i + 3], segmentsWithContour [j + 2], segmentsWithContour [j + 3])) {
-						if (!linesContoured.Contains (i + 2) || (linesContoured.Contains (i + 2) && (segmentsWithContour [i + 2] - segmentsWithContour [i + 3]).sqrMagnitude > (intersection - segmentsWithContour [i + 3]).sqrMagnitude)) {
-							segmentsWithContour [i + 2] = intersection;
-						}
-						if (!linesContoured.Contains (j + 3) || (linesContoured.Contains (j + 3) && (segmentsWithContour [j + 3] - segmentsWithContour [j + 2]).sqrMagnitude > (intersection - segmentsWithContour [j + 2]).sqrMagnitude)) {
-							segmentsWithContour [j + 3] = intersection;
-						}
-					}
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 4], segmentsWithContour [i + 5], segmentsWithContour [j + 4], segmentsWithContour [j + 5])) {
-						if (!linesContoured.Contains (i + 4) || (linesContoured.Contains (i + 4) && (segmentsWithContour [i + 4] - segmentsWithContour [i + 5]).sqrMagnitude > (intersection - segmentsWithContour [i + 5]).sqrMagnitude)) {
-							segmentsWithContour [i + 4] = intersection;
-							linesContoured.Add (i + 4);
-						}
-						if (!linesContoured.Contains (j + 5) || (linesContoured.Contains (j + 5) && (segmentsWithContour [j + 5] - segmentsWithContour [j + 4]).sqrMagnitude > (intersection - segmentsWithContour [j + 4]).sqrMagnitude)) {
-							segmentsWithContour [j + 5] = intersection;
-							linesContoured.Add (j + 5);
-						}
-					}
-				} else if (segmentsWithContour [i + 1] == segmentsWithContour [j + 1]) {
-					vertices.Add (segmentsWithContour [i + 1]);
-					Vector3 intersection = Vector3.zero;
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 2], segmentsWithContour [i + 3], segmentsWithContour [j + 4], segmentsWithContour [j + 5])) {
-						if (!linesContoured.Contains (i + 3) || (linesContoured.Contains (i + 3) && (segmentsWithContour [i + 3] - segmentsWithContour [i + 2]).sqrMagnitude > (intersection - segmentsWithContour [i + 2]).sqrMagnitude)) {
-							segmentsWithContour [i + 3] = intersection;
-							linesContoured.Add (i + 3);
-						}
-						if (!linesContoured.Contains (j + 5) || (linesContoured.Contains (j + 5) && (segmentsWithContour [j + 5] - segmentsWithContour [j + 4]).sqrMagnitude > (intersection - segmentsWithContour [j + 4]).sqrMagnitude)) {
-							segmentsWithContour [j + 5] = intersection;
-							linesContoured.Add (j + 5);
-						}
-					}
-					if (Line.RayRayIntersection (out intersection, segmentsWithContour [i + 4], segmentsWithContour [i + 5], segmentsWithContour [j + 2], segmentsWithContour [j + 3])) {
-						if (!linesContoured.Contains (i + 5) || (linesContoured.Contains (i + 5) && (segmentsWithContour [i + 5] - segmentsWithContour [i + 4]).sqrMagnitude > (intersection - segmentsWithContour [i + 4]).sqrMagnitude)) {
-							segmentsWithContour [i + 5] = intersection;
-							linesContoured.Add (i + 5);
-						}
-						if (!linesContoured.Contains (j + 3) || (linesContoured.Contains (j + 3) && (segmentsWithContour [j + 3] - segmentsWithContour [j + 2]).sqrMagnitude > (intersection - segmentsWithContour [j + 2]).sqrMagnitude)) {
-							segmentsWithContour [j + 3] = intersection;
-							linesContoured.Add (j + 3);
-						}
-					}
-				}
-			}
-		}
+		Line.WeldIntersections(segmentsWithContour, out vertices);
 
 		// find end point edges
 		List<Vector3> endpointsSegments = new List<Vector3> ();

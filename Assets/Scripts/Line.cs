@@ -1436,15 +1436,48 @@ public class Line
                         //ab ab
                         //ba ba
                         if ((topology[i][j].b - topology[i][j - 1].a).sqrMagnitude <= 0.00001f)
-                        {
-                            topology[i][j - 1].a = topology[i][j].a;
+						{
+							//topology[i][j].b must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology[k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].bID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].bID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2) 
+							{
+								topology [i] [j - 1].a = topology [i] [j].a;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
                         }
                         else
                         {
-                            topology[i][j - 1].b = topology[i][j].b;
+							//topology[i][j].a must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology[k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].aID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].aID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2)
+							{
+								topology [i] [j - 1].b = topology [i] [j].b;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
                         }
-                        topology[i][j].Destroy();
-                        topology[i].RemoveAt(j);
+                        
                     }
                     else if ((dir1 - -dir2).sqrMagnitude <= 0.00001f)
                     {
@@ -1452,14 +1485,47 @@ public class Line
                         //ba ab
                         if ((topology[i][j].b - topology[i][j - 1].b).sqrMagnitude <= 0.00001f)
                         {
-                            topology[i][j - 1].b = topology[i][j].a;
+							//topology[i][j].b must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology[k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].bID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].bID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2)
+							{
+								topology [i] [j - 1].b = topology [i] [j].a;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
                         }
                         else
                         {
-                            topology[i][j - 1].a = topology[i][j].b;
+							//topology[i][j].a must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology[k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].aID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].aID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2)
+							{
+								topology [i] [j - 1].a = topology [i] [j].b;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
                         }
-                        topology[i][j].Destroy();
-                        topology[i].RemoveAt(j);
+                        
                     }
                 }
             }
@@ -1502,6 +1568,7 @@ public class Line
 
     public static void FillCap(List<Line> lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
     {
+		
         if (lines.Count < 3)
             throw new UnityException("lines are less than 3");
 

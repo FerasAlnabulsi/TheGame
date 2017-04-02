@@ -1199,7 +1199,7 @@ public class BuildingArea : MonoBehaviour
         }
         wallFaces.Clear();
         GameObject.Destroy(upperWallFace);
-        upperWallFace = null;
+		upperWallFace = null;
 
         List<WallFace> outerWall;
         List<WallFace> doorSides;
@@ -1207,6 +1207,10 @@ public class BuildingArea : MonoBehaviour
 
 
         List<Mesh> floors;
+
+		if (optimize) {
+			Line.OptimizePath (ref lines);
+		}
 
 		Line.Generate3DWallFacesFromLines(lines, WallWireframeMaterial, WallSelectedMaterial, out outerWall, out doorSides, out innerWall, out upperWallFace, out floors);
 
