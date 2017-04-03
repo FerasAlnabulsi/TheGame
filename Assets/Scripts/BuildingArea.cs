@@ -1304,6 +1304,10 @@ public class BuildingArea : MonoBehaviour
 
 	}
 
+	void aaa()
+	{
+	}
+
 }
 
 
