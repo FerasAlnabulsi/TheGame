@@ -1303,10 +1303,7 @@ public class BuildingArea : MonoBehaviour
 		viewingMode = ViewingMode.Exterior;
 
 	}
-
-	void aaa()
-	{
-	}
+		
 
 }
 

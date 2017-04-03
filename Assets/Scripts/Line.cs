@@ -1566,16 +1566,25 @@ public class Line
     }
 
 
-    public static void FillCap(List<Line> lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
+    public static void FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
     {
-		
+
+		List<Line> lines = new List<Line> (_lines);
+		OptimizePath (ref lines);
+
         if (lines.Count < 3)
             throw new UnityException("lines are less than 3");
+
+
+
 
 
         // outerEdge1, outerEdge2 any 2 connected edges where the angle less than 180
         int e1 = -1;
         int[] e2 = { -1, -1 };
+
+
+
         List<Line> list = new List<Line>(lines);
         triangles = new List<int>();
 
