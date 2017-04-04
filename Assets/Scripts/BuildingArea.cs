@@ -1303,6 +1303,13 @@ public class BuildingArea : MonoBehaviour
 		viewingMode = ViewingMode.Exterior;
 
 	}
+
+    public void SetRoofMaterial(Material Mat)
+    {
+        if(Mat !=null)
+        Roof.GetComponent<MeshRenderer>().material = Mat;   
+
+    }
 		
 
 }
