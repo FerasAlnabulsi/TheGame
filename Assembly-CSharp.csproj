@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\DragObjectByMouse.cs" />
      <Compile Include="Assets\Scripts\Draggable.cs" />
      <Compile Include="Assets\Scripts\Fade.cs" />
+     <Compile Include="Assets\Scripts\InGameMenu.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\ItemsManager.cs" />
      <Compile Include="Assets\Scripts\Line.cs" />

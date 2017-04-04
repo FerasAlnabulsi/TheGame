@@ -2,16 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.AttachToProcess" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Line.cs">
     <Files>
-      <File FileName="Assets/Scripts/BuildingArea.cs" Line="1212" Column="1" />
-      <File FileName="Assets/Scripts/Line.cs" Line="1524" Column="7" />
-      <File FileName="Assets/Scripts/UpperWallFace.cs" Line="181" Column="4" />
+      <File FileName="Assets/Scripts/BuildingArea.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Line.cs" Line="56" Column="39" />
+      <File FileName="Assets/Scripts/UpperWallFace.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint conditionExpression="lines.Count == 2" file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/BuildingArea.cs" line="1005" column="1" />
-      <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1423" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
