@@ -312,6 +312,7 @@ public class BuildingArea : MonoBehaviour
 
     public void DeleteSelectedWall()
     {
+		selectedWallFace.RelatedLine.Destroy ();
         lines.Remove(selectedWallFace.RelatedLine);
         selectedWallFace = null;
         regeneratePath(true);
@@ -1018,7 +1019,7 @@ public class BuildingArea : MonoBehaviour
                                 lineVertices.Add(pointB);
                             }
 
-                            lines.Add(new Line(lineVertices, id1, id2, 0.4f, LineMaterial, DefaultInnerWallMaterial, DefaultOuterWallMaterial, DefaultSideMaterial));
+                            lines.Add(new Line(lineVertices, id1, id2, 0.2f, LineMaterial, DefaultInnerWallMaterial, DefaultOuterWallMaterial, DefaultSideMaterial));
                             lines[lines.Count - 1].Parent = this.transform;
                             pointASelected = false;
                             DraggedLine.Enabled = false;
@@ -1217,14 +1218,7 @@ public class BuildingArea : MonoBehaviour
 		try{
 
 	        //		gggg (lines, WallWireframeMaterial, WallSelectedMaterial, out outerWall, out doorSides, out innerWall, out upperWallFace, out floors);
-			if (Roof != null){
-				GameObject.Destroy(Roof);
-				Roof = null;
-			}
-			Roof = new GameObject("roof");
-	        Roof.AddComponent<Roof>().CreateFromLines(lines, 0.4f, 0.4f);
-	        Roof.transform.parent = transform;
-			Roof.GetComponent<MeshRenderer>().material = DefaultRoofMaterial;
+
 
 			for (int i = 0; i < this.floors.Count; i++)
 			{
@@ -1244,6 +1238,15 @@ public class BuildingArea : MonoBehaviour
 	            floor.transform.parent = this.transform;
 				this.floors.Add(floor);
 			}
+
+			if (Roof != null){
+				GameObject.Destroy(Roof);
+				Roof = null;
+			}
+			Roof = new GameObject("roof");
+			Roof.AddComponent<Roof>().CreateFromLines(lines, 0.4f, 0.4f);
+			Roof.transform.parent = transform;
+			Roof.GetComponent<MeshRenderer>().material = DefaultRoofMaterial;
 		}
 		catch {
 		}

@@ -1,14 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.AttachToProcess" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Line.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UpperWallFace.cs">
     <Files>
-      <File FileName="Assets/Scripts/BuildingArea.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Line.cs" Line="56" Column="39" />
-      <File FileName="Assets/Scripts/UpperWallFace.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BuildingArea.cs" Line="315" Column="37" />
+      <File FileName="Assets/Scripts/Line.cs" Line="1591" Column="1" />
+      <File FileName="Assets/Scripts/UpperWallFace.cs" Line="647" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1809" column="1" />
+      <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1594" column="1" />
+      <Breakpoint conditionExpression="eeee &gt; 5000" file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1591" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

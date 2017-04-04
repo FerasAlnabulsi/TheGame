@@ -41,6 +41,10 @@ public class Line
             {
                 Windows[i].Update();
             }
+			for (int i = 0; i < Doors.Count; i++)
+			{
+				Doors[i].Update();
+			}
         }
     }
     public Vector3 b
@@ -58,6 +62,10 @@ public class Line
             {
                 Windows[i].Update();
             }
+			for (int i = 0; i < Doors.Count; i++)
+			{
+				Doors[i].Update();
+			}
         }
     }
 
@@ -77,6 +85,10 @@ public class Line
                 {
                     Windows[i].Update();
                 }
+				for (int i = 0; i < Doors.Count; i++)
+				{
+					Doors[i].Update();
+				}
             }
         }
     }
@@ -96,6 +108,10 @@ public class Line
                 {
                     Windows[i].Update();
                 }
+				for (int i = 0; i < Doors.Count; i++)
+				{
+					Doors[i].Update();
+				}
             }
         }
     }
@@ -210,6 +226,12 @@ public class Line
             GameObject.DestroyImmediate(lr.gameObject);
             lr = null;
         }
+		for (int i = 0; i < Windows.Count; i++) {
+			GameObject.Destroy (Windows [i].Window);
+		}
+		for (int i = 0; i < Doors.Count; i++) {
+			GameObject.Destroy (Doors [i].Door);
+		}
     }
 
     class helper
@@ -1170,34 +1192,35 @@ public class Line
             {
                 directedPaths[i].Reverse();
 
-                {
-                    List<Line> toCap = new List<Line>();
-                    List<Vector3> tmpverts = new List<Vector3>();
-                    tmpverts.AddRange(directedPaths[i]);
-                    for (int j = 0; j < directedPaths[i].Count; j += 2)
-                    {
-                        Line ll = new Line(tmpverts, j, j + 1, 0, null, null, null, null);
-                        ll.Destroy();
-                        toCap.Add(ll);
-                    }
+				{
+					List<Line> toCap = new List<Line> ();
+					List<Vector3> tmpverts = new List<Vector3> ();
+					tmpverts.AddRange (directedPaths [i]);
+					for (int j = 0; j < directedPaths [i].Count; j += 2) {
+						Line ll = new Line (tmpverts, j, j + 1, 0, null, null, null, null);
+						ll.Destroy ();
+						toCap.Add (ll);
+					}
 
-                    Line.WeldVertices(toCap);
-                    List<int> triangles;
-                    List<Vector3> verts;
-                    List<Vector2> uvs;
-                    List<Vector3> normals;
+					Line.WeldVertices (toCap);
+					List<int> triangles;
+					List<Vector3> verts;
+					List<Vector2> uvs;
+					List<Vector3> normals;
+					try {
+						Line.FillCap (toCap, out triangles, out verts, out uvs, out normals);
+						Mesh mm = new Mesh () {
+							vertices = verts.ToArray (),
+							uv = uvs.ToArray (),
+							normals = normals.ToArray (),
+							triangles = triangles.ToArray ()
+						};
+						floors.Add (mm);
+					} catch {
+					}
 
-                    Line.FillCap(toCap, out triangles, out verts, out uvs, out normals);
 
-                    Mesh mm = new Mesh()
-                    {
-                        vertices = verts.ToArray(),
-                        uv = uvs.ToArray(),
-                        normals = normals.ToArray(),
-                        triangles = triangles.ToArray()
-                    };
-                    floors.Add(mm);
-                }
+				}
 
                 for (int j = 0; j < directedPaths[i].Count; j += 2)
                 {
@@ -1672,7 +1695,7 @@ public class Line
                     {
                         if ((tmp - Vector3.right * 1000f + Vector3.forward * 3000f).magnitude <= (middlePoint[i] - Vector3.right * 1000f + Vector3.forward * 3000f).magnitude)
                         {
-                            if ((tmp - lines[k].a).magnitude <= (lines[k].b - lines[k].a).magnitude)
+                            if ((tmp - lines[k].a).magnitude < (lines[k].b - lines[k].a).magnitude)
                             {
                                 if (Vector3.Dot(tmp - lines[k].a, lines[k].b - lines[k].a) >= 0)
                                 {
@@ -1745,8 +1768,9 @@ public class Line
                 //				triangles.Add (list [1].aID == list [0].aID ? list [1].bID : list [1].aID);
 
                 HashSet<int> abc = new HashSet<int>() { list[0].aID, list[0].bID, list[1].aID, list[1].bID };
-                triangles.AddRange(abc);
-
+				if (abc.Count == 3)
+	                triangles.AddRange(abc);
+	
 
                 //				for (int i = 0; i < triangles.Count; i += 3) {
                 //					Debug.Log (triangles [i] + " " + triangles [i + 1] + " " + triangles [i + 2] + "\n");
@@ -1772,11 +1796,17 @@ public class Line
                 uvs.Add(new Vector2(verts[i].x, verts[i].z));
             }
 
+
+//			while (triangles.Count % 3 != 0)
+//				triangles.RemoveAt (triangles.Count - 1);
+			
+
             for (int i = 0; i < triangles.Count; i += 3)
             {
                 if (i + 2 >= triangles.Count)
                 {
                     i--;
+					break;
                 }
                 Plane p = new Plane(verts[triangles[i]], verts[triangles[i + 1]], verts[triangles[i + 2]]);
                 if (Vector3.Dot(p.normal, Vector3.up) < 0)

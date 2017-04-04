@@ -248,6 +248,7 @@ public class WallFace
 		WallMesh.uv = new Vector2[] { Vector2.zero, new Vector2(Vector3.Distance(_a, _b), 0), new Vector2(Vector3.Distance(_a, _b), _height), new Vector2(0, _height) };
 		WallMesh.triangles = new int[] { 0, 1, 2, 2, 3, 0 };
 		WallMesh.RecalculateNormals ();
+
 		if (gameObject != null) {
 			GameObject.Destroy (mr);
 			GameObject.DestroyImmediate (gameObject);
