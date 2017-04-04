@@ -1306,8 +1306,8 @@ public class BuildingArea : MonoBehaviour
 
     public void SetRoofMaterial(Material Mat)
     {
-        if(Mat !=null)
-        Roof.GetComponent<MeshRenderer>().material = Mat;   
+        if (Mat != null)
+        	Roof.GetComponent<MeshRenderer>().material = Mat;   
 
     }
 		
