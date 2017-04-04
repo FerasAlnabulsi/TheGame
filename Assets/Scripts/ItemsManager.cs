@@ -63,6 +63,7 @@ public class ItemsManager : MonoBehaviour
 
             else if (allObjectList[i].itemType == type.Roof)
             {
+                
                 button.transform.SetParent(roofPanel.transform);//Setting button parent
             }
 
