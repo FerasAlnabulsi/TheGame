@@ -312,6 +312,7 @@ public class BuildingArea : MonoBehaviour
 
     public void DeleteSelectedWall()
     {
+		selectedWallFace.RelatedLine.Destroy ();
         lines.Remove(selectedWallFace.RelatedLine);
         selectedWallFace = null;
         regeneratePath(true);
@@ -1018,7 +1019,7 @@ public class BuildingArea : MonoBehaviour
                                 lineVertices.Add(pointB);
                             }
 
-                            lines.Add(new Line(lineVertices, id1, id2, 0.4f, LineMaterial, DefaultInnerWallMaterial, DefaultOuterWallMaterial, DefaultSideMaterial));
+                            lines.Add(new Line(lineVertices, id1, id2, 0.2f, LineMaterial, DefaultInnerWallMaterial, DefaultOuterWallMaterial, DefaultSideMaterial));
                             lines[lines.Count - 1].Parent = this.transform;
                             pointASelected = false;
                             DraggedLine.Enabled = false;
@@ -1217,14 +1218,7 @@ public class BuildingArea : MonoBehaviour
 		try{
 
 	        //		gggg (lines, WallWireframeMaterial, WallSelectedMaterial, out outerWall, out doorSides, out innerWall, out upperWallFace, out floors);
-			if (Roof != null){
-				GameObject.Destroy(Roof);
-				Roof = null;
-			}
-			Roof = new GameObject("roof");
-	        Roof.AddComponent<Roof>().CreateFromLines(lines, 0.4f, 0.4f);
-	        Roof.transform.parent = transform;
-			Roof.GetComponent<MeshRenderer>().material = DefaultRoofMaterial;
+
 
 			for (int i = 0; i < this.floors.Count; i++)
 			{
@@ -1244,6 +1238,15 @@ public class BuildingArea : MonoBehaviour
 	            floor.transform.parent = this.transform;
 				this.floors.Add(floor);
 			}
+
+			if (Roof != null){
+				GameObject.Destroy(Roof);
+				Roof = null;
+			}
+			Roof = new GameObject("roof");
+			Roof.AddComponent<Roof>().CreateFromLines(lines, 0.4f, 0.4f);
+			Roof.transform.parent = transform;
+			Roof.GetComponent<MeshRenderer>().material = DefaultRoofMaterial;
 		}
 		catch {
 		}
@@ -1301,17 +1304,64 @@ public class BuildingArea : MonoBehaviour
 	public void WireFrameWallViewExterior()
 	{
 		viewingMode = ViewingMode.Exterior;
-
 	}
 
     public void SetRoofMaterial(Material Mat)
     {
-        if(Mat !=null)
-        Roof.GetComponent<MeshRenderer>().material = Mat;   
-
+        if (Mat != null)
+        	Roof.GetComponent<MeshRenderer>().material = Mat;
+        DefaultRoofMaterial = Mat;
     }
-		
+
+    public void SetOuterWallMaterial(Material Mat)
+    {
+        if (Mat != null)
+        {
+			SetSelectedWallFaceMaterials(DefaultInnerWallMaterial,Mat,DefaultSideMaterial);
+        }
+    }
+
+
+	public void GetWallArea()
+	{
+		float wallSum = 0;
+		wallSum+=(selectedWallFace.RelatedLine.a - selectedWallFace.RelatedLine.b).magnitude;
+		wallSum *= selectedWallFace.Height;
+		Debug.Log ("the area of the wall = " + wallSum +" M");
+	}
+
+	public void GetAllWindowArea()
+	{
+		float windowSum = 0;
+		float h , w;
+		for (int i = 0; i <selectedWallFace.RelatedLine.Windows.Count ; i++) 
+		{
+			h = selectedWallFace.RelatedLine.Windows [i].WindowHeight;
+			w = selectedWallFace.RelatedLine.Windows [i].WindowWidth;
+			windowSum += (h * w);
+		}
+		Debug.Log ("The area of all windows at this wall ="+ windowSum);
+	}
+
+
+	public void GetAllDoorArea()
+	{
+		float doorSum = 0;
+		float h , w;
+		for (int i = 0; i <selectedWallFace.RelatedLine.Doors.Count ; i++) 
+		{
+			h = selectedWallFace.RelatedLine.Doors [i].DoorHeight;
+			w = selectedWallFace.RelatedLine.Doors [i].DoorWidth;
+			doorSum += (h * w);
+		}
+		Debug.Log ("The area of all doors at this wall ="+ doorSum);
+	}
+
+
+	public void GetWallThickness()
+	{
+		float th = selectedWallFace.RelatedLine.Thickness;
+		Debug.Log ("the thickness of this wall =" + th);
+	}
 
 }
-
-

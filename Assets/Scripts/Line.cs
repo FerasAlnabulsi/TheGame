@@ -35,11 +35,16 @@ public class Line
         set
         {
             Vertices[_a] = value;
-            lr.SetPosition(0, Vertices[_a]);
+			if (lr != null)
+				lr.SetPosition (0, Vertices [_a]);
             for (int i = 0; i < Windows.Count; i++)
             {
                 Windows[i].Update();
             }
+			for (int i = 0; i < Doors.Count; i++)
+			{
+				Doors[i].Update();
+			}
         }
     }
     public Vector3 b
@@ -51,11 +56,16 @@ public class Line
         set
         {
             Vertices[_b] = value;
-            lr.SetPosition(1, Vertices[_b]);
+			if (lr != null)
+				lr.SetPosition (1, Vertices [_b]);
             for (int i = 0; i < Windows.Count; i++)
             {
                 Windows[i].Update();
             }
+			for (int i = 0; i < Doors.Count; i++)
+			{
+				Doors[i].Update();
+			}
         }
     }
 
@@ -75,6 +85,10 @@ public class Line
                 {
                     Windows[i].Update();
                 }
+				for (int i = 0; i < Doors.Count; i++)
+				{
+					Doors[i].Update();
+				}
             }
         }
     }
@@ -94,6 +108,10 @@ public class Line
                 {
                     Windows[i].Update();
                 }
+				for (int i = 0; i < Doors.Count; i++)
+				{
+					Doors[i].Update();
+				}
             }
         }
     }
@@ -208,6 +226,12 @@ public class Line
             GameObject.DestroyImmediate(lr.gameObject);
             lr = null;
         }
+		for (int i = 0; i < Windows.Count; i++) {
+			GameObject.Destroy (Windows [i].Window);
+		}
+		for (int i = 0; i < Doors.Count; i++) {
+			GameObject.Destroy (Doors [i].Door);
+		}
     }
 
     class helper
@@ -1168,34 +1192,35 @@ public class Line
             {
                 directedPaths[i].Reverse();
 
-                {
-                    List<Line> toCap = new List<Line>();
-                    List<Vector3> tmpverts = new List<Vector3>();
-                    tmpverts.AddRange(directedPaths[i]);
-                    for (int j = 0; j < directedPaths[i].Count; j += 2)
-                    {
-                        Line ll = new Line(tmpverts, j, j + 1, 0, null, null, null, null);
-                        ll.Destroy();
-                        toCap.Add(ll);
-                    }
+				{
+					List<Line> toCap = new List<Line> ();
+					List<Vector3> tmpverts = new List<Vector3> ();
+					tmpverts.AddRange (directedPaths [i]);
+					for (int j = 0; j < directedPaths [i].Count; j += 2) {
+						Line ll = new Line (tmpverts, j, j + 1, 0, null, null, null, null);
+						ll.Destroy ();
+						toCap.Add (ll);
+					}
 
-                    Line.WeldVertices(toCap);
-                    List<int> triangles;
-                    List<Vector3> verts;
-                    List<Vector2> uvs;
-                    List<Vector3> normals;
+					Line.WeldVertices (toCap);
+					List<int> triangles;
+					List<Vector3> verts;
+					List<Vector2> uvs;
+					List<Vector3> normals;
+					try {
+						Line.FillCap (toCap, out triangles, out verts, out uvs, out normals);
+						Mesh mm = new Mesh () {
+							vertices = verts.ToArray (),
+							uv = uvs.ToArray (),
+							normals = normals.ToArray (),
+							triangles = triangles.ToArray ()
+						};
+						floors.Add (mm);
+					} catch {
+					}
 
-                    Line.FillCap(toCap, out triangles, out verts, out uvs, out normals);
 
-                    Mesh mm = new Mesh()
-                    {
-                        vertices = verts.ToArray(),
-                        uv = uvs.ToArray(),
-                        normals = normals.ToArray(),
-                        triangles = triangles.ToArray()
-                    };
-                    floors.Add(mm);
-                }
+				}
 
                 for (int j = 0; j < directedPaths[i].Count; j += 2)
                 {
@@ -1364,83 +1389,71 @@ public class Line
 
 
     public static void OptimizePath(ref List<Line> lines)
-    {
-        // remove 0 length lines
-        for (int i = lines.Count - 1; i >= 0; i--)
-        {
-            if ((lines[i].a - lines[i].b).sqrMagnitude <= 0.0001f)
-            {
-                lines[i].Destroy();
-                lines.RemoveAt(i);
-            }
-        }
+	{
+		// remove 0 length lines
+		for (int i = lines.Count - 1; i >= 0; i--) {
+			if ((lines [i].a - lines [i].b).sqrMagnitude <= 0.0001f) {
+				lines [i].Destroy ();
+				lines.RemoveAt (i);
+			}
+		}
 
-        if (lines.Count == 0)
-            return;
+		if (lines.Count == 0)
+			return;
 
-        // find paths
-        List<List<Line>> topology = new List<List<Line>>();
-        topology.Add(new List<Line>());
-        topology[topology.Count - 1].Add(lines[0]);
-        Vector3 lastPoint = lines[0].b;
-        lines.RemoveAt(0);
+		// find paths
+		List<List<Line>> topology = new List<List<Line>> ();
+		topology.Add (new List<Line> ());
+		topology [topology.Count - 1].Add (lines [0]);
+		Vector3 lastPoint = lines [0].b;
+		lines.RemoveAt (0);
 
-        while (lines.Count > 0)
-        {
-            bool flag = true;
-            for (int i = 0; i < lines.Count; i++)
-            {
-                if (lastPoint == lines[i].a)
-                {
-                    topology[topology.Count - 1].Add(lines[i]);
-                    lastPoint = lines[i].b;
-                    lines.RemoveAt(i);
-                    flag = false;
-                    break;
-                }
-                else if (lastPoint == lines[i].b)
-                {
-                    topology[topology.Count - 1].Add(lines[i]);
-                    lastPoint = lines[i].a;
-                    lines.RemoveAt(i);
-                    flag = false;
-                    break;
-                }
-            }
+		while (lines.Count > 0) {
+			bool flag = true;
+			for (int i = 0; i < lines.Count; i++) {
+				if (lastPoint == lines [i].a) {
+					topology [topology.Count - 1].Add (lines [i]);
+					lastPoint = lines [i].b;
+					lines.RemoveAt (i);
+					flag = false;
+					break;
+				} else if (lastPoint == lines [i].b) {
+					topology [topology.Count - 1].Add (lines [i]);
+					lastPoint = lines [i].a;
+					lines.RemoveAt (i);
+					flag = false;
+					break;
+				}
+			}
 
-            if (flag)
-            {
-                // to avoid infinite loop
-                // make new directed path
-                topology.Add(new List<Line>());
-                topology[topology.Count - 1].Add(lines[0]);
-                lastPoint = lines[0].b;
-                lines.RemoveAt(0);
-            }
-        }
+			if (flag) {
+				// to avoid infinite loop
+				// make new directed path
+				topology.Add (new List<Line> ());
+				topology [topology.Count - 1].Add (lines [0]);
+				lastPoint = lines [0].b;
+				lines.RemoveAt (0);
+			}
+		}
 
-        // for each segment x, y if (x, y are in the same direction and connected) connect (x,y)
-        for (int i = 0; i < topology.Count; i++)
-        {
-            for (int j = topology[i].Count - 1; j >= 1; j--)
-            {
-                if (topology[i][j - 1].LineType == topology[i][j].LineType)
-                {
-                    Vector3 dir1 = topology[i][j - 1].b - topology[i][j - 1].a;
-                    Vector3 dir2 = topology[i][j].b - topology[i][j].a;
-                    dir1.Normalize();
-                    dir2.Normalize();
-                    //same direction
-                    if ((dir1 - dir2).sqrMagnitude <= 0.00001f)
-                    {
-                        //ab ab
-                        //ba ba
-                        if ((topology[i][j].b - topology[i][j - 1].a).sqrMagnitude <= 0.00001f)
-						{
+		// for each segment x, y if (x, y are in the same direction and connected) connect (x,y)
+		for (int i = 0; i < topology.Count; i++) {
+			for (int j = topology [i].Count - 1; j >= 1; j--) {
+				
+				if (topology [i] [j - 1].LineType == topology [i] [j].LineType) {
+					Vector3 dir1 = topology [i] [j - 1].b - topology [i] [j - 1].a;
+					Vector3 dir2 = topology [i] [j].b - topology [i] [j].a;
+					dir1.Normalize ();
+					dir2.Normalize ();
+					//same direction
+					if ((dir1 - dir2).sqrMagnitude <= 0.00001f) {
+						//ab ab
+						//ba ba
+						if ((topology [i] [j].b - topology [i] [j - 1].a).sqrMagnitude <= 0.00001f) {
 							//topology[i][j].b must be shared with 2 only
 							int flag = 0;
 							for (int k = 0; k < topology.Count; k++) {
-								for (int kk = 0; kk < topology[k].Count; kk++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
 									if (topology [k] [kk].aID == topology [i] [j].bID) {
 										flag++;
 									}
@@ -1449,19 +1462,16 @@ public class Line
 									}
 								}
 							}
-							if (flag == 2) 
-							{
+							if (flag == 2) {
 								topology [i] [j - 1].a = topology [i] [j].a;
 								topology [i] [j].Destroy ();
 								topology [i].RemoveAt (j);
 							}
-                        }
-                        else
-                        {
+						} else {
 							//topology[i][j].a must be shared with 2 only
 							int flag = 0;
 							for (int k = 0; k < topology.Count; k++) {
-								for (int kk = 0; kk < topology[k].Count; kk++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
 									if (topology [k] [kk].aID == topology [i] [j].aID) {
 										flag++;
 									}
@@ -1470,25 +1480,21 @@ public class Line
 									}
 								}
 							}
-							if (flag == 2)
-							{
+							if (flag == 2) {
 								topology [i] [j - 1].b = topology [i] [j].b;
 								topology [i] [j].Destroy ();
 								topology [i].RemoveAt (j);
 							}
-                        }
+						}
                         
-                    }
-                    else if ((dir1 - -dir2).sqrMagnitude <= 0.00001f)
-                    {
-                        //ab ba
-                        //ba ab
-                        if ((topology[i][j].b - topology[i][j - 1].b).sqrMagnitude <= 0.00001f)
-                        {
+					} else if ((dir1 - -dir2).sqrMagnitude <= 0.00001f) {
+						//ab ba
+						//ba ab
+						if ((topology [i] [j].b - topology [i] [j - 1].b).sqrMagnitude <= 0.00001f) {
 							//topology[i][j].b must be shared with 2 only
 							int flag = 0;
 							for (int k = 0; k < topology.Count; k++) {
-								for (int kk = 0; kk < topology[k].Count; kk++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
 									if (topology [k] [kk].aID == topology [i] [j].bID) {
 										flag++;
 									}
@@ -1497,19 +1503,16 @@ public class Line
 									}
 								}
 							}
-							if (flag == 2)
-							{
+							if (flag == 2) {
 								topology [i] [j - 1].b = topology [i] [j].a;
 								topology [i] [j].Destroy ();
 								topology [i].RemoveAt (j);
 							}
-                        }
-                        else
-                        {
+						} else {
 							//topology[i][j].a must be shared with 2 only
 							int flag = 0;
 							for (int k = 0; k < topology.Count; k++) {
-								for (int kk = 0; kk < topology[k].Count; kk++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
 									if (topology [k] [kk].aID == topology [i] [j].aID) {
 										flag++;
 									}
@@ -1518,52 +1521,46 @@ public class Line
 									}
 								}
 							}
-							if (flag == 2)
-							{
+							if (flag == 2) {
 								topology [i] [j - 1].a = topology [i] [j].b;
 								topology [i] [j].Destroy ();
 								topology [i].RemoveAt (j);
 							}
-                        }
-                        
-                    }
-                }
-            }
-        }
+						}
+					}
+				}
+			}
+		}
+		
 
-        // for each segment in path try to split if a vertex is between segment vertices
-        for (int i = 0; i < topology.Count; i++)
-        {
-            HashSet<Vector3> vertices = new HashSet<Vector3>();
-            for (int j = 0; j < topology[i].Count; j++)
-            {
-                vertices.Add(topology[i][j].a);
-                vertices.Add(topology[i][j].b);
-            }
+		// for each segment in path try to split if a vertex is between segment vertices
+		for (int i = 0; i < topology.Count; i++) {
+			HashSet<Vector3> vertices = new HashSet<Vector3> ();
+			for (int j = 0; j < topology [i].Count; j++) {
+				vertices.Add (topology [i] [j].a);
+				vertices.Add (topology [i] [j].b);
+			}
 
-            for (int j = 0; j < topology.Count; j++)
-            {
+			for (int j = 0; j < topology.Count; j++) {
 
-                if (i == j)
-                    continue;
+				if (i == j)
+					continue;
 
-                foreach (Vector3 v in (IEnumerable)vertices)
-                {
-                    List<Line> nlines = Split(topology[j], v);
-                    topology[j] = nlines;
-                }
+				foreach (Vector3 v in (IEnumerable)vertices) {
+					List<Line> nlines = Split (topology [j], v);
+					topology [j] = nlines;
+				}
 
 
-            }
-        }
+			}
+		}
 
 
 
-        for (int i = 0; i < topology.Count; i++)
-        {
-            lines.AddRange(topology[i]);
-        }
-    }
+		for (int i = 0; i < topology.Count; i++) {
+			lines.AddRange (topology [i]);
+		}
+	}
 
 
     public static void FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
@@ -1698,7 +1695,7 @@ public class Line
                     {
                         if ((tmp - Vector3.right * 1000f + Vector3.forward * 3000f).magnitude <= (middlePoint[i] - Vector3.right * 1000f + Vector3.forward * 3000f).magnitude)
                         {
-                            if ((tmp - lines[k].a).magnitude <= (lines[k].b - lines[k].a).magnitude)
+                            if ((tmp - lines[k].a).magnitude < (lines[k].b - lines[k].a).magnitude)
                             {
                                 if (Vector3.Dot(tmp - lines[k].a, lines[k].b - lines[k].a) >= 0)
                                 {
@@ -1771,8 +1768,9 @@ public class Line
                 //				triangles.Add (list [1].aID == list [0].aID ? list [1].bID : list [1].aID);
 
                 HashSet<int> abc = new HashSet<int>() { list[0].aID, list[0].bID, list[1].aID, list[1].bID };
-                triangles.AddRange(abc);
-
+				if (abc.Count == 3)
+	                triangles.AddRange(abc);
+	
 
                 //				for (int i = 0; i < triangles.Count; i += 3) {
                 //					Debug.Log (triangles [i] + " " + triangles [i + 1] + " " + triangles [i + 2] + "\n");
@@ -1798,11 +1796,17 @@ public class Line
                 uvs.Add(new Vector2(verts[i].x, verts[i].z));
             }
 
+
+//			while (triangles.Count % 3 != 0)
+//				triangles.RemoveAt (triangles.Count - 1);
+			
+
             for (int i = 0; i < triangles.Count; i += 3)
             {
                 if (i + 2 >= triangles.Count)
                 {
                     i--;
+					break;
                 }
                 Plane p = new Plane(verts[triangles[i]], verts[triangles[i + 1]], verts[triangles[i + 2]]);
                 if (Vector3.Dot(p.normal, Vector3.up) < 0)

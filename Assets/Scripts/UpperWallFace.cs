@@ -457,7 +457,7 @@ public class UpperWallFace : MonoBehaviour
 				
 				}
 
-				if (pathId[i] != null && i != j && helper.anyEqualAny(pathId [i], pathId [j])) {
+				if (pathId [i] != null && i != j && helper.anyEqualAny (pathId [i], pathId [j])) {
 					if (dpcount > 2)
 						throw new UnityException ("More than 2 directed pathes for same line !");
 					dpcount++;
@@ -474,7 +474,7 @@ public class UpperWallFace : MonoBehaviour
 				Vector3 tmp = (l1v1 + l1v2) * 0.5f;
 				float dst = float.MaxValue;
 				int selectedj = -1;
-				for (int j = 0; j < directedPaths[secondID].Count; j += 2) {
+				for (int j = 0; j < directedPaths [secondID].Count; j += 2) {
 					float det = ((directedPaths [secondID] [j] + directedPaths [secondID] [j + 1]) * 0.5f - tmp).sqrMagnitude;
 					if (dst > det) {
 						dst = det;
@@ -495,7 +495,7 @@ public class UpperWallFace : MonoBehaviour
 
 
 				List<Line> directedPath = new List<Line> ();
-				for (int j = 0; j < directedPaths[i].Count; j += 2) {
+				for (int j = 0; j < directedPaths [i].Count; j += 2) {
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
 						return (directedPaths [i] [j] - obj).sqrMagnitude <= 0.00001f;
 					});
@@ -512,7 +512,7 @@ public class UpperWallFace : MonoBehaviour
 						__Vertices.Add (directedPaths [i] [j + 1]);
 					}
 
-					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId[i][0].SideMaterial));
+					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId [i] [0].SideMaterial));
 				}
 
 				{
@@ -532,7 +532,7 @@ public class UpperWallFace : MonoBehaviour
 						__Vertices.Add (l2v1);
 					}
 
-					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId[i][0].SideMaterial));
+					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId [i] [0].SideMaterial));
 				}
 
 				{
@@ -552,10 +552,10 @@ public class UpperWallFace : MonoBehaviour
 						__Vertices.Add (l2v2);
 					}
 
-					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId[i][0].SideMaterial));
+					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId [i] [0].SideMaterial));
 				}
 
-				for (int j = 0; j < directedPaths[secondID].Count; j += 2) {
+				for (int j = 0; j < directedPaths [secondID].Count; j += 2) {
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
 						return (directedPaths [secondID] [j] - obj).sqrMagnitude <= 0.00001f;
 					});
@@ -572,7 +572,7 @@ public class UpperWallFace : MonoBehaviour
 						__Vertices.Add (directedPaths [secondID] [j + 1]);
 					}
 
-					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId[secondID][0].SideMaterial));
+					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId [secondID] [0].SideMaterial));
 				
 
 				}
@@ -587,7 +587,7 @@ public class UpperWallFace : MonoBehaviour
 				CombineInstance ci = new CombineInstance ();
 				ci.mesh = new Mesh ();
 				for (int j = 0; j < verts.Count; j++) {
-					verts [j] = new Vector3 (verts [j].x, pathId [i][0].Height, verts [j].z);
+					verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
 				}
 				ci.mesh.vertices = verts.ToArray ();
 				ci.mesh.uv = uvs.ToArray ();
@@ -597,7 +597,7 @@ public class UpperWallFace : MonoBehaviour
 
 				ci.subMeshIndex = combineInstances.Count;
 				combineInstances.Add (ci);
-				sideMaterials.Add (pathId [i][0].SideMaterial);
+				sideMaterials.Add (pathId [i] [0].SideMaterial);
 				pathId.Add (pathId [i]);
 				pathId.RemoveAt (i);
 				pathId.RemoveAt (secondID);
@@ -617,7 +617,7 @@ public class UpperWallFace : MonoBehaviour
 //				i--;
 			} else {
 				List<Line> directedPath = new List<Line> ();
-				for (int j = 0; j < directedPaths[i].Count; j += 2) {
+				for (int j = 0; j < directedPaths [i].Count; j += 2) {
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
 						return (directedPaths [i] [j] - obj).sqrMagnitude <= 0.00001f;
 					});
@@ -634,7 +634,7 @@ public class UpperWallFace : MonoBehaviour
 						__Vertices.Add (directedPaths [i] [j + 1]);
 					}
 
-					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId[i][0].SideMaterial));
+					directedPath.Add (new Line (__Vertices, id1, id2, 1, null, null, null, pathId [i] [0].SideMaterial));
 				}
 
 				Line.WeldVertices (directedPath);
@@ -642,23 +642,26 @@ public class UpperWallFace : MonoBehaviour
 				List<Vector2> uvs;
 				List<Vector3> verts;
 				List<Vector3> normals;
-				Line.FillCap (directedPath, out indices, out verts, out uvs, out normals);
-				CombineInstance ci = new CombineInstance ();
-				ci.mesh = new Mesh ();
-				for (int j = 0; j < verts.Count; j++) {
-					verts [j] = new Vector3 (verts [j].x, pathId [i][0].Height, verts [j].z);
+				try {
+					Line.FillCap (directedPath, out indices, out verts, out uvs, out normals);
+					CombineInstance ci = new CombineInstance ();
+					ci.mesh = new Mesh ();
+					for (int j = 0; j < verts.Count; j++) {
+						verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
+					}
+
+
+					ci.mesh.vertices = verts.ToArray ();
+					ci.mesh.uv = uvs.ToArray ();
+					ci.mesh.normals = normals.ToArray ();
+					ci.mesh.SetIndices (indices.ToArray (), MeshTopology.Triangles, 0);
+					ci.transform = Matrix4x4.identity;
+
+					ci.subMeshIndex = 0;//combineInstances.Count;
+					combineInstances.Add (ci);
+				} catch {
 				}
-
-
-				ci.mesh.vertices = verts.ToArray ();
-				ci.mesh.uv = uvs.ToArray ();
-				ci.mesh.normals = normals.ToArray ();
-				ci.mesh.SetIndices (indices.ToArray (), MeshTopology.Triangles, 0);
-				ci.transform = Matrix4x4.identity;
-
-				ci.subMeshIndex = 0;//combineInstances.Count;
-				combineInstances.Add (ci);
-				sideMaterials.Add (pathId [i][0].SideMaterial);
+				sideMaterials.Add (pathId [i] [0].SideMaterial);
 			}
 		}
 
