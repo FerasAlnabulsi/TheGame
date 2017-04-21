@@ -225,8 +225,8 @@ public class UpperWallFace : MonoBehaviour
 			int minSeg = -1;
 			float dst = float.MaxValue;
 			for (int j = 0; j < directedPaths[i].Count; j += 2) {
-				float det = (directedPaths[i] [j] - Vector3.right * 1000000).sqrMagnitude;
-				det += (directedPaths[i] [j + 1] - Vector3.right * 1000000).sqrMagnitude;
+				float det = (directedPaths[i] [j] - Vector3.right * 1000.0f).sqrMagnitude;
+				det += (directedPaths[i] [j + 1] - Vector3.right * 1000.0f).sqrMagnitude;
 				if (det < dst) {
 					dst = det;
 					minSeg = j;
@@ -257,9 +257,9 @@ public class UpperWallFace : MonoBehaviour
 			float pathidDst = 0;
 			// bug .. [\] will not work correctly
 			int rand = Random.Range(0, directedPaths[i].Count / 2) * 2;
-			Vector3 randomVertex = Vector3.Lerp (directedPaths [i] [rand], directedPaths [i] [rand + 1], Random.Range (1, 100) / 100.0f);
-			//if (i == 1)
-			//	randomVertex = new Vector3 (2.9f, 0, 2.4f);
+			Vector3 randomVertex = Vector3.Lerp (directedPaths [i] [rand], directedPaths [i] [rand + 1], Random.Range (1, 99) / 100.0f);
+
+			Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), 0, Random.Range(10000.0f, 50000.0f));
 
 			int intersectionCount = 0;
 			for (int j = 0; j < directedPaths.Count; j++) 
@@ -268,8 +268,8 @@ public class UpperWallFace : MonoBehaviour
 					for (int k = 0; k < directedPaths[j].Count; k += 2) {
 
 						Vector3 tmp;
-						if (Line.RayRayIntersection (out tmp, directedPaths [j] [k], directedPaths [j] [k + 1], randomVertex, Vector3.right * 1000f + Vector3.forward * 3000f)) {
-							if ((tmp - Vector3.right * 1000f + Vector3.forward * 3000f).magnitude <= (randomVertex - Vector3.right * 1000f + Vector3.forward * 3000f).magnitude) {
+						if (Line.RayRayIntersection (out tmp, directedPaths [j] [k], directedPaths [j] [k + 1], randomVertex, randomOutterPoint)) {
+							if ((tmp - randomOutterPoint).magnitude <= (randomVertex - randomOutterPoint).magnitude) {
 								if ((tmp - directedPaths [j] [k]).magnitude <= (directedPaths [j] [k + 1] - directedPaths [j] [k]).magnitude){
 									if (Vector3.Dot (tmp - directedPaths [j] [k], directedPaths [j] [k + 1] - directedPaths [j] [k]) >= 0) {
 										intersectionCount++;
@@ -497,10 +497,10 @@ public class UpperWallFace : MonoBehaviour
 				List<Line> directedPath = new List<Line> ();
 				for (int j = 0; j < directedPaths [i].Count; j += 2) {
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (directedPaths [i] [j] - obj).sqrMagnitude <= 0.00001f;
+						return (directedPaths [i] [j] - obj).sqrMagnitude <= 0.0000001f;
 					});
 					int id2 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (directedPaths [i] [j + 1] - obj).sqrMagnitude <= 0.00001f;
+						return (directedPaths [i] [j + 1] - obj).sqrMagnitude <= 0.0000001f;
 					});
 
 					if (id1 == -1) {
@@ -517,10 +517,10 @@ public class UpperWallFace : MonoBehaviour
 
 				{
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (l1v1 - obj).sqrMagnitude <= 0.00001f;
+						return (l1v1 - obj).sqrMagnitude <= 0.0000001f;
 					});
 					int id2 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (l2v1 - obj).sqrMagnitude <= 0.00001f;
+						return (l2v1 - obj).sqrMagnitude <= 0.0000001f;
 					});
 
 					if (id1 == -1) {
@@ -537,10 +537,10 @@ public class UpperWallFace : MonoBehaviour
 
 				{
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (l1v2 - obj).sqrMagnitude <= 0.00001f;
+						return (l1v2 - obj).sqrMagnitude <= 0.0000001f;
 					});
 					int id2 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (l2v2 - obj).sqrMagnitude <= 0.00001f;
+						return (l2v2 - obj).sqrMagnitude <= 0.0000001f;
 					});
 
 					if (id1 == -1) {
@@ -557,10 +557,10 @@ public class UpperWallFace : MonoBehaviour
 
 				for (int j = 0; j < directedPaths [secondID].Count; j += 2) {
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (directedPaths [secondID] [j] - obj).sqrMagnitude <= 0.00001f;
+						return (directedPaths [secondID] [j] - obj).sqrMagnitude <= 0.0000001f;
 					});
 					int id2 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (directedPaths [secondID] [j + 1] - obj).sqrMagnitude <= 0.00001f;
+						return (directedPaths [secondID] [j + 1] - obj).sqrMagnitude <= 0.0000001f;
 					});
 
 					if (id1 == -1) {
@@ -583,46 +583,51 @@ public class UpperWallFace : MonoBehaviour
 				List<Vector2> uvs;
 				List<Vector3> verts;
 				List<Vector3> normals;
-				Line.FillCap (directedPath, out indices, out verts, out uvs, out normals);
-				CombineInstance ci = new CombineInstance ();
-				ci.mesh = new Mesh ();
-				for (int j = 0; j < verts.Count; j++) {
-					verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
-				}
-				ci.mesh.vertices = verts.ToArray ();
-				ci.mesh.uv = uvs.ToArray ();
-				ci.mesh.normals = normals.ToArray ();
-				ci.mesh.SetIndices (indices.ToArray (), MeshTopology.Triangles, 0);
-				ci.transform = Matrix4x4.identity;
+				try {
+					Line.FillCap (directedPath, out indices, out verts, out uvs, out normals);
+				
+					CombineInstance ci = new CombineInstance ();
+					ci.mesh = new Mesh ();
+					for (int j = 0; j < verts.Count; j++) {
+						verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
+					}
+					ci.mesh.vertices = verts.ToArray ();
+					ci.mesh.uv = uvs.ToArray ();
+					ci.mesh.normals = normals.ToArray ();
+					ci.mesh.SetIndices (indices.ToArray (), MeshTopology.Triangles, 0);
+					ci.transform = Matrix4x4.identity;
 
-				ci.subMeshIndex = combineInstances.Count;
-				combineInstances.Add (ci);
-				sideMaterials.Add (pathId [i] [0].SideMaterial);
-				pathId.Add (pathId [i]);
-				pathId.RemoveAt (i);
-				pathId.RemoveAt (secondID);
-				directedPaths.RemoveAt (i);
-				directedPaths.RemoveAt (secondID);
-				List<Vector3> finalQuad = new List<Vector3> ();
-				finalQuad.Add (l1v1);
-				finalQuad.Add (l1v2);
-				finalQuad.Add (l2v1);
-				finalQuad.Add (l2v2);
-				finalQuad.Add (l1v1);
-				finalQuad.Add (l2v1);
-				finalQuad.Add (l1v2);
-				finalQuad.Add (l2v2);
-				directedPaths.Add (finalQuad);
+					ci.subMeshIndex = combineInstances.Count;
+					combineInstances.Add (ci);
+					sideMaterials.Add (pathId [i] [0].SideMaterial);
+					pathId.Add (pathId [i]);
+					pathId.RemoveAt (i);
+					pathId.RemoveAt (secondID);
+					directedPaths.RemoveAt (i);
+					directedPaths.RemoveAt (secondID);
+					List<Vector3> finalQuad = new List<Vector3> ();
+					finalQuad.Add (l1v1);
+					finalQuad.Add (l1v2);
+					finalQuad.Add (l2v1);
+					finalQuad.Add (l2v2);
+					finalQuad.Add (l1v1);
+					finalQuad.Add (l2v1);
+					finalQuad.Add (l1v2);
+					finalQuad.Add (l2v2);
+					directedPaths.Add (finalQuad);
 //				pathId.Add (null);
 //				i--;
+				} catch {
+					Debug.Log ("Cap Upper wall face !!");
+				}
 			} else {
 				List<Line> directedPath = new List<Line> ();
 				for (int j = 0; j < directedPaths [i].Count; j += 2) {
 					int id1 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (directedPaths [i] [j] - obj).sqrMagnitude <= 0.00001f;
+						return (directedPaths [i] [j] - obj).sqrMagnitude <= 0.0000001f;
 					});
 					int id2 = __Vertices.FindIndex (delegate(Vector3 obj) {
-						return (directedPaths [i] [j + 1] - obj).sqrMagnitude <= 0.00001f;
+						return (directedPaths [i] [j + 1] - obj).sqrMagnitude <= 0.0000001f;
 					});
 
 					if (id1 == -1) {
@@ -660,6 +665,7 @@ public class UpperWallFace : MonoBehaviour
 					ci.subMeshIndex = 0;//combineInstances.Count;
 					combineInstances.Add (ci);
 				} catch {
+					Debug.Log ("Cap upper wall face !");
 				}
 				sideMaterials.Add (pathId [i] [0].SideMaterial);
 			}
