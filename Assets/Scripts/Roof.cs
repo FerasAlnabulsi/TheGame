@@ -130,8 +130,7 @@ public class Roof : MonoBehaviour {
 			List<Line> outer = new List<Line> ();
 			List<Vector3> tmpverts = new List<Vector3> ();
 			tmpverts.AddRange (directedPaths [outerDP]);
-			for (int j = 0; j < directedPaths[outerDP].Count; j += 2)
-			{
+			for (int j = 0; j < directedPaths [outerDP].Count; j += 2) {
 				Line ll = new Line (tmpverts, j, j + 1, 0, null, null, null, null);
 				ll.Destroy ();
 
@@ -148,155 +147,158 @@ public class Roof : MonoBehaviour {
 			List<Vector2> uvs;
 			List<Vector3> normals;
 
-			Line.FillCap (inner, out triangles, out verts, out uvs, out normals);
-
-
-
-			//bridge inner/outer
-			Line[] near2Outer2 = new Line[4];
-			float[] dst2 = { float.MaxValue, float.MaxValue };
-			for (int i = 0; i < inner.Count; i++) {
-				float det;
-				det = ((inner [i].a + inner [i].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
-				if (dst2 [0] > det) 
-				{
-					dst2 [0] = det;
-					near2Outer2 [0] = inner [i];
-					near2Outer2 [1] = null;
-				} 
-				else if (Mathf.Abs(dst2 [0] - det) <= 0.000001f) 
-				{
-					near2Outer2 [1] = inner [i];
-				}
-			}
-
-			for (int i = 0; i < outer.Count; i++) {
-				float det;
-				det = ((outer [i].a + outer [i].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
-				if (dst2 [1] > det) 
-				{
-					dst2 [1] = det;
-					near2Outer2 [2] = outer [i];
-					near2Outer2 [3] = null;
-				} 
-				else if (Mathf.Abs(dst2 [1] - det) <= 0.000001f) 
-				{
-					near2Outer2 [3] = outer [i];
-				}
-			}
-
-			infiniteRandomPoint = new Vector3 (-infiniteRandomPoint.z, infiniteRandomPoint.y, infiniteRandomPoint.x);
-			dst2 = new float[] { float.MaxValue, float.MaxValue, float.MaxValue, float.MaxValue };
-
-			dst2 [0] = ((near2Outer2 [0].a + near2Outer2 [0].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
-			if (near2Outer2 [1] != null)
-				dst2 [1] = ((near2Outer2 [1].a + near2Outer2 [1].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
-
-			dst2 [2] = ((near2Outer2 [2].a + near2Outer2 [2].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
-			if (near2Outer2 [3] != null)
-				dst2 [3] = ((near2Outer2 [3].a + near2Outer2 [3].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+			try {
+				Line.FillCap (inner, out triangles, out verts, out uvs, out normals);
 			
-			int min1 = dst2 [0] < dst2 [1] ? 0 : 1;
-			int min2 = dst2 [2] < dst2 [3] ? 2 : 3;
 
-			List<Vector3> newLines = new List<Vector3> ();
-			for (int i = 0; i < inner.Count; i++) {
-				if (inner [i] != near2Outer2 [min1]) {
-					newLines.Add (inner [i].a);
-					newLines.Add (inner [i].b);
+
+				//bridge inner/outer
+				Line[] near2Outer2 = new Line[4];
+				float[] dst2 = { float.MaxValue, float.MaxValue };
+				for (int i = 0; i < inner.Count; i++) {
+					float det;
+					det = ((inner [i].a + inner [i].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+					if (dst2 [0] > det) {
+						dst2 [0] = det;
+						near2Outer2 [0] = inner [i];
+						near2Outer2 [1] = null;
+					} else if (Mathf.Abs (dst2 [0] - det) <= Line.epsilon) {
+						near2Outer2 [1] = inner [i];
+					}
 				}
-			}
-			for (int i = 0; i < outer.Count; i++) {
-				if (outer [i] != near2Outer2 [min2]) {
-					newLines.Add (outer [i].a);
-					newLines.Add (outer [i].b);
+
+				for (int i = 0; i < outer.Count; i++) {
+					float det;
+					det = ((outer [i].a + outer [i].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+					if (dst2 [1] > det) {
+						dst2 [1] = det;
+						near2Outer2 [2] = outer [i];
+						near2Outer2 [3] = null;
+					} else if (Mathf.Abs (dst2 [1] - det) <= Line.epsilon) {
+						near2Outer2 [3] = outer [i];
+					}
 				}
+
+				infiniteRandomPoint = new Vector3 (-infiniteRandomPoint.z, infiniteRandomPoint.y, infiniteRandomPoint.x);
+				dst2 = new float[] { float.MaxValue, float.MaxValue, float.MaxValue, float.MaxValue };
+
+				dst2 [0] = ((near2Outer2 [0].a + near2Outer2 [0].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+				if (near2Outer2 [1] != null)
+					dst2 [1] = ((near2Outer2 [1].a + near2Outer2 [1].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+
+				dst2 [2] = ((near2Outer2 [2].a + near2Outer2 [2].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+				if (near2Outer2 [3] != null)
+					dst2 [3] = ((near2Outer2 [3].a + near2Outer2 [3].b) * 0.5f - infiniteRandomPoint).sqrMagnitude;
+			
+				int min1 = dst2 [0] < dst2 [1] ? 0 : 1;
+				int min2 = dst2 [2] < dst2 [3] ? 2 : 3;
+
+				List<Vector3> newLines = new List<Vector3> ();
+				for (int i = 0; i < inner.Count; i++) {
+					if (inner [i] != near2Outer2 [min1]) {
+						newLines.Add (inner [i].a);
+						newLines.Add (inner [i].b);
+					}
+				}
+				for (int i = 0; i < outer.Count; i++) {
+					if (outer [i] != near2Outer2 [min2]) {
+						newLines.Add (outer [i].a);
+						newLines.Add (outer [i].b);
+					}
+				}
+
+				dst2 = new float[2];
+				dst2 [0] = (near2Outer2 [min1].a - near2Outer2 [min2].a).sqrMagnitude;
+				dst2 [1] = (near2Outer2 [min1].a - near2Outer2 [min2].b).sqrMagnitude;
+
+				List<Vector3> lastQuad = new List<Vector3> ();
+
+				if (dst2 [0] < dst2 [1]) {
+					newLines.Add (near2Outer2 [min1].a);
+					newLines.Add (near2Outer2 [min2].a);
+					newLines.Add (near2Outer2 [min1].b);
+					newLines.Add (near2Outer2 [min2].b);
+
+					lastQuad.Add (near2Outer2 [min1].a);
+					lastQuad.Add (near2Outer2 [min2].a);
+					lastQuad.Add (near2Outer2 [min1].b);
+					lastQuad.Add (near2Outer2 [min1].b);
+					lastQuad.Add (near2Outer2 [min2].a);
+					lastQuad.Add (near2Outer2 [min2].b);
+
+
+				} else {
+					newLines.Add (near2Outer2 [min1].a);
+					newLines.Add (near2Outer2 [min2].b);
+					newLines.Add (near2Outer2 [min1].b);
+					newLines.Add (near2Outer2 [min2].a);
+
+					lastQuad.Add (near2Outer2 [min1].a);
+					lastQuad.Add (near2Outer2 [min1].b);
+					lastQuad.Add (near2Outer2 [min2].a);
+					lastQuad.Add (near2Outer2 [min1].a);
+					lastQuad.Add (near2Outer2 [min2].a);
+					lastQuad.Add (near2Outer2 [min2].b);
+				}
+
+
+
+				List<Line> CapLines = new List<Line> ();
+				for (int i = 0; i < newLines.Count; i += 2) {
+					Line l = new Line (newLines, i, i + 1, 0, null, null, null, null);
+					l.Destroy ();
+					CapLines.Add (l);
+				}
+				Line.WeldVertices (CapLines);
+
+				List<int> triangles2;
+				List<Vector3> verts2;
+				List<Vector2> uvs2;
+				List<Vector3> normals2;
+
+				try {
+					Line.FillCap (CapLines, out triangles2, out verts2, out uvs2, out normals2);
+
+					for (int i = 0; i < triangles2.Count; i++) {
+						triangles2 [i] += verts.Count;
+					}
+
+
+
+					List<Vector3> innerVertices = new List<Vector3> (verts);
+
+
+					triangles.AddRange (triangles2);
+					verts.AddRange (verts2);
+					uvs.AddRange (uvs2);
+					normals.AddRange (normals2);
+
+					for (int i = 0; i < lastQuad.Count; i++) {
+						triangles.Add (verts.IndexOf (lastQuad [i]));
+					}
+
+
+
+					for (int i = 0; i < verts.Count; i++) {
+						if (innerVertices.FindIndex (delegate(Vector3 obj) {
+							return (verts [i] - obj).sqrMagnitude <= Line.epsilon;
+						}) != -1)
+							verts [i] += Vector3.up * hatHeight;
+					}
+
+					for (int i = 0; i < verts.Count; i++) {
+						verts [i] += Vector3.up * segments [0].Height;
+					}
+
+					_mesh = new Mesh () { vertices = verts.ToArray (), uv = uvs.ToArray (), triangles = triangles.ToArray () };
+					_mesh.RecalculateNormals ();
+				} catch {
+					Debug.Log ("Cap roof !");
+				}
+			} catch {
+				Debug.Log ("Roof Cap !");
 			}
 
-			dst2 = new float[2];
-			dst2 [0] = (near2Outer2 [min1].a - near2Outer2 [min2].a).sqrMagnitude;
-			dst2 [1] = (near2Outer2 [min1].a - near2Outer2 [min2].b).sqrMagnitude;
-
-			List<Vector3> lastQuad = new List<Vector3> ();
-
-			if (dst2 [0] < dst2 [1]) {
-				newLines.Add (near2Outer2 [min1].a);
-				newLines.Add (near2Outer2 [min2].a);
-				newLines.Add (near2Outer2 [min1].b);
-				newLines.Add (near2Outer2 [min2].b);
-
-				lastQuad.Add (near2Outer2 [min1].a);
-				lastQuad.Add (near2Outer2 [min2].a);
-				lastQuad.Add (near2Outer2 [min1].b);
-				lastQuad.Add (near2Outer2 [min1].b);
-				lastQuad.Add (near2Outer2 [min2].a);
-				lastQuad.Add (near2Outer2 [min2].b);
-
-
-			} else {
-				newLines.Add (near2Outer2 [min1].a);
-				newLines.Add (near2Outer2 [min2].b);
-				newLines.Add (near2Outer2 [min1].b);
-				newLines.Add (near2Outer2 [min2].a);
-
-				lastQuad.Add (near2Outer2 [min1].a);
-				lastQuad.Add (near2Outer2 [min1].b);
-				lastQuad.Add (near2Outer2 [min2].a);
-				lastQuad.Add (near2Outer2 [min1].a);
-				lastQuad.Add (near2Outer2 [min2].a);
-				lastQuad.Add (near2Outer2 [min2].b);
-			}
-
-
-
-			List<Line> CapLines = new List<Line> ();
-			for (int i = 0; i < newLines.Count; i += 2) {
-				Line l = new Line (newLines, i, i + 1, 0, null, null, null, null);
-				l.Destroy ();
-				CapLines.Add (l);
-			}
-			Line.WeldVertices (CapLines);
-
-			List<int> triangles2;
-			List<Vector3> verts2;
-			List<Vector2> uvs2;
-			List<Vector3> normals2;
-
-			Line.FillCap (CapLines, out triangles2, out verts2, out uvs2, out normals2);
-
-			for (int i = 0; i < triangles2.Count; i++) {
-				triangles2 [i] += verts.Count;
-			}
-
-
-
-			List<Vector3> innerVertices = new List<Vector3> (verts);
-
-
-			triangles.AddRange (triangles2);
-			verts.AddRange (verts2);
-			uvs.AddRange (uvs2);
-			normals.AddRange (normals2);
-
-			for (int i = 0; i < lastQuad.Count; i++) {
-				triangles.Add (verts.IndexOf (lastQuad [i]));
-			}
-
-
-
-			for (int i = 0; i < verts.Count; i++) {
-				if (innerVertices.FindIndex (delegate(Vector3 obj) {
-					return (verts[i] - obj).sqrMagnitude <= 0.0001f;
-				}) != -1)
-					verts [i] += Vector3.up * hatHeight;
-			}
-
-			for (int i = 0; i < verts.Count; i++) {
-				verts [i] += Vector3.up * segments [0].Height;
-			}
-
-			_mesh = new Mesh () { vertices = verts.ToArray(), uv = uvs.ToArray(), triangles = triangles.ToArray() };
-			_mesh.RecalculateNormals ();
 		}
 
 		_filter = this.gameObject.AddComponent<MeshFilter> ();
