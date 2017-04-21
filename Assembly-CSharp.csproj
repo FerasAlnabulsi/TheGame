@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EditableBuilding.cs" />
      <Compile Include="Assets\PrefabItem.cs" />
      <Compile Include="Assets\Scripts\BuildingArea.cs" />
      <Compile Include="Assets\Scripts\DragObjectByMouse.cs" />

@@ -43,6 +43,12 @@ public class Draggable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_collider = GetComponent<Collider> ();
+		if (_collider == null) {
+			_collider = GetComponentInChildren<Collider> ();
+		}
+		if (_collider == null) {
+			Debug.Log ("No collider found on this object");
+		}
 	}
 		
 
@@ -89,21 +95,25 @@ public class Draggable : MonoBehaviour {
 
 				Vector3 tmp = snapToGrid (unsnappedPosition);
 				if (!XEnabled)
-					tmp.x = transform.position.x;
+					tmp.x = startPosition.x;
 				if (!YEnabled)
-					tmp.y = transform.position.y;
+					tmp.y = startPosition.y;
 				if (!ZEnabled)
-					tmp.z = transform.position.z;
+					tmp.z = startPosition.z;
 				tmp += offsetToGrid;
 				if (Moving != null && (tmp - transform.position).sqrMagnitude > 0.00001f)
 					Moving (gameObject, transform.position, tmp);
 				
 
 				//transform.position = snapToGrid (transform.position);
+				if (XEnabled)
+					startPosition.x = mouseCurrentPosition.x;
+				if (YEnabled)
+					startPosition.y = mouseCurrentPosition.y;
+				if (ZEnabled)
+					startPosition.z = mouseCurrentPosition.z;
 
-				startPosition = mouseCurrentPosition;
-
-			} else if (Input.GetMouseButtonUp (0)) {
+			} else if (Input.GetMouseButtonUp (0) && startedMoving) {
 
 				startedMoving = false;
 				IsDragging = false;
