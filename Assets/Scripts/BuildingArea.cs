@@ -1099,19 +1099,13 @@ public class BuildingArea : MonoBehaviour
 				GameObject.Destroy(Roof);
 				Roof = null;
 			}
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 			Roof = new GameObject("roof");
 			Roof.AddComponent<Roof>().CreateFromLines(lines, 0.4f, 0.4f);
 			Roof.transform.parent = transform;
 			Roof.GetComponent<MeshRenderer>().material = DefaultRoofMaterial;
-<<<<<<< HEAD
-=======
 			if (_viewingMode == ViewingMode.Interior)
 				Roof.SetActive (false);
->>>>>>> master
 		}
 		catch {
 		}
@@ -1174,13 +1168,9 @@ public class BuildingArea : MonoBehaviour
     public void SetRoofMaterial(Material Mat)
     {
         if (Mat != null)
-<<<<<<< HEAD
         	Roof.GetComponent<MeshRenderer>().material = Mat;
         DefaultRoofMaterial = Mat;
     }
-=======
-        	Roof.GetComponent<MeshRenderer>().material = Mat;   
->>>>>>> master
 
     public void SetOuterWallMaterial(Material Mat)
     {

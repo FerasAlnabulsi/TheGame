@@ -1,12 +1,5 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.AttachToProcess" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UpperWallFace.cs">
-    <Files>
-      <File FileName="Assets/Scripts/BuildingArea.cs" Line="315" Column="37" />
-      <File FileName="Assets/Scripts/Line.cs" Line="1591" Column="1" />
-      <File FileName="Assets/Scripts/UpperWallFace.cs" Line="647" Column="4" />
-=======
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/EditableBuilding.cs">
     <Files>
       <File FileName="Assets/EditableBuilding.cs" Line="14" Column="3" />
@@ -14,22 +7,15 @@
       <File FileName="Assets/Scripts/Line.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Roof.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/UpperWallFace.cs" Line="1" Column="1" />
->>>>>>> master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-<<<<<<< HEAD
-      <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1809" column="1" />
-      <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1594" column="1" />
-      <Breakpoint conditionExpression="eeee &gt; 5000" file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1591" column="1" />
-=======
       <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1798" column="1" />
       <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1826" column="6" />
       <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/Scripts/Line.cs" line="1771" column="1" />
       <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/EditableBuilding.cs" line="41" column="1" />
       <Breakpoint file="/Users/Mofed/GitHub/TheGame/Assets/EditableBuilding.cs" line="56" column="1" />
->>>>>>> master
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

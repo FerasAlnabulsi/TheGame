@@ -583,38 +583,6 @@ public class UpperWallFace : MonoBehaviour
 				List<Vector2> uvs;
 				List<Vector3> verts;
 				List<Vector3> normals;
-<<<<<<< HEAD
-				Line.FillCap (directedPath, out indices, out verts, out uvs, out normals);
-				CombineInstance ci = new CombineInstance ();
-				ci.mesh = new Mesh ();
-				for (int j = 0; j < verts.Count; j++) {
-					verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
-				}
-				ci.mesh.vertices = verts.ToArray ();
-				ci.mesh.uv = uvs.ToArray ();
-				ci.mesh.normals = normals.ToArray ();
-				ci.mesh.SetIndices (indices.ToArray (), MeshTopology.Triangles, 0);
-				ci.transform = Matrix4x4.identity;
-
-				ci.subMeshIndex = combineInstances.Count;
-				combineInstances.Add (ci);
-				sideMaterials.Add (pathId [i] [0].SideMaterial);
-				pathId.Add (pathId [i]);
-				pathId.RemoveAt (i);
-				pathId.RemoveAt (secondID);
-				directedPaths.RemoveAt (i);
-				directedPaths.RemoveAt (secondID);
-				List<Vector3> finalQuad = new List<Vector3> ();
-				finalQuad.Add (l1v1);
-				finalQuad.Add (l1v2);
-				finalQuad.Add (l2v1);
-				finalQuad.Add (l2v2);
-				finalQuad.Add (l1v1);
-				finalQuad.Add (l2v1);
-				finalQuad.Add (l1v2);
-				finalQuad.Add (l2v2);
-				directedPaths.Add (finalQuad);
-=======
 				try {
 					Line.FillCap (directedPath, out indices, out verts, out uvs, out normals);
 				
@@ -647,7 +615,6 @@ public class UpperWallFace : MonoBehaviour
 					finalQuad.Add (l1v2);
 					finalQuad.Add (l2v2);
 					directedPaths.Add (finalQuad);
->>>>>>> master
 //				pathId.Add (null);
 //				i--;
 				} catch {
@@ -698,10 +665,7 @@ public class UpperWallFace : MonoBehaviour
 					ci.subMeshIndex = 0;//combineInstances.Count;
 					combineInstances.Add (ci);
 				} catch {
-<<<<<<< HEAD
-=======
 					Debug.Log ("Cap upper wall face !");
->>>>>>> master
 				}
 				sideMaterials.Add (pathId [i] [0].SideMaterial);
 			}
