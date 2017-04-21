@@ -1,0 +1,2 @@
+C:\Users\MIII\Desktop\last update\TheGame-master project\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\MIII\Desktop\last update\TheGame-master project\obj\Debug\Assembly-CSharp.dll

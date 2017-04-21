@@ -48,12 +48,12 @@ public class BuildingArea : MonoBehaviour
     }
 
 
-	ViewingMode _viewingMode;
+    ViewingMode _viewingMode;
     public ViewingMode viewingMode
     {
         get {
-			return _viewingMode;
-		}
+            return _viewingMode;
+        }
         set {
 			_viewingMode = value;
 			if (_viewingMode == ViewingMode.Interior) {
@@ -82,8 +82,8 @@ public class BuildingArea : MonoBehaviour
     public Material DefaultOuterWallMaterial;
     public Material DefaultInnerWallMaterial;
     public Material DefaultSideMaterial;
-	public Material DefaultRoofMaterial;
-	public Material DefaultFloorMaterial;
+    public Material DefaultRoofMaterial;
+    public Material DefaultFloorMaterial;
 
     public float DoubleClickCatchTime = 0.25f;
 
@@ -150,6 +150,7 @@ public class BuildingArea : MonoBehaviour
 
     private List<Vector3> lineVertices = new List<Vector3>();
     public List<Line> lines = new List<Line>();
+
 	private List<GameObject> floors = new List<GameObject>();
 	private List<Collider> floorColliders = new List<Collider> ();
 	private GameObject Roof;
@@ -352,7 +353,7 @@ public class BuildingArea : MonoBehaviour
                     {
                         lines[j].InnerMaterial = innerMaterial;
                         lines[j].OuterMaterial = outerMaterial;
-						lines [j].SideMaterial = sideMaterial;
+						lines[j].SideMaterial = sideMaterial;
                         endpoints.Add(lines[j].a);
                     }
                 }
@@ -403,8 +404,8 @@ public class BuildingArea : MonoBehaviour
 
             for (int i = 0; i < count; i++)
             {
-                //				WallWindow window = new WallWindow (_selectedWallFace.RelatedLine, new Vector2((i * 2 + 1) * frac * (_selectedWallFace.RelatedLine.b - _selectedWallFace.RelatedLine.a).magnitude, _selectedWallFace.RelatedLine.Height * 0.2f),(_selectedWallFace.RelatedLine.b - _selectedWallFace.RelatedLine.a).magnitude * 1.0f / (count * 2 + 1), _selectedWallFace.RelatedLine.Height * 0.5f, null);
-                //				_selectedWallFace.RelatedLine.Windows.Add (window);
+                //              WallWindow window = new WallWindow (_selectedWallFace.RelatedLine, new Vector2((i * 2 + 1) * frac * (_selectedWallFace.RelatedLine.b - _selectedWallFace.RelatedLine.a).magnitude, _selectedWallFace.RelatedLine.Height * 0.2f),(_selectedWallFace.RelatedLine.b - _selectedWallFace.RelatedLine.a).magnitude * 1.0f / (count * 2 + 1), _selectedWallFace.RelatedLine.Height * 0.5f, null);
+                //              _selectedWallFace.RelatedLine.Windows.Add (window);
 
                 WallDoor w = new WallDoor(_selectedWallFace.RelatedLine, (i * 2 + 1) * frac * (_selectedWallFace.RelatedLine.b - _selectedWallFace.RelatedLine.a).magnitude, (_selectedWallFace.RelatedLine.b - _selectedWallFace.RelatedLine.a).magnitude * 1.0f / (count * 2 + 1), _selectedWallFace.RelatedLine.Height * 0.5f, null);
                 _selectedWallFace.RelatedLine.Doors.Add(w);
@@ -542,7 +543,6 @@ public class BuildingArea : MonoBehaviour
 				}
 				floorColliders [floorID].enabled = wasEnabled;
 			}
-				
 
             Bounds oldAABB = aabb;
             aabb = alignToFloor(aabb);
@@ -560,14 +560,14 @@ public class BuildingArea : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
         {
-			Collider[] colliders = items [i].GetComponentsInChildren<Collider> ();
-			if (colliders.Length == 0)
-				continue;
-			
-			Bounds aabb2 = colliders[0].bounds;
-			for (int j = 0; j < colliders.Length; j++) {
-				aabb2.Encapsulate(colliders[j].bounds);
-			}
+            Collider[] colliders = items [i].GetComponentsInChildren<Collider> ();
+            if (colliders.Length == 0)
+                continue;
+            
+            Bounds aabb2 = colliders[0].bounds;
+            for (int j = 0; j < colliders.Length; j++) {
+                aabb2.Encapsulate(colliders[j].bounds);
+            }
 
             if (aabb.Intersects(aabb2))
             {
@@ -608,25 +608,25 @@ public class BuildingArea : MonoBehaviour
                 {
                     wallFaces[i].Wireframe = true;
                     wallFaces[i].Solid = false;
-					for (int j = 0; j < wallFaces[i].RelatedLine.Doors.Count; j++) {
-						wallFaces [i].RelatedLine.Doors [j].Door.SetActive (false);
-					}
-					for (int j = 0; j < wallFaces[i].RelatedLine.Windows.Count; j++) {
-						wallFaces [i].RelatedLine.Windows [j].Window.SetActive (false);
-					}
-					wallFaces [i].gameObject.GetComponent<Collider> ().enabled = false;
+                    for (int j = 0; j < wallFaces[i].RelatedLine.Doors.Count; j++) {
+                        wallFaces [i].RelatedLine.Doors [j].Door.SetActive (false);
+                    }
+                    for (int j = 0; j < wallFaces[i].RelatedLine.Windows.Count; j++) {
+                        wallFaces [i].RelatedLine.Windows [j].Window.SetActive (false);
+                    }
+                    wallFaces [i].gameObject.GetComponent<Collider> ().enabled = false;
                 }
                 else
                 {
                     wallFaces[i].Wireframe = false;
                     wallFaces[i].Solid = true;
-					for (int j = 0; j < wallFaces[i].RelatedLine.Doors.Count; j++) {
-						wallFaces [i].RelatedLine.Doors [j].Door.SetActive (true);
-					}
-					for (int j = 0; j < wallFaces[i].RelatedLine.Windows.Count; j++) {
-						wallFaces [i].RelatedLine.Windows [j].Window.SetActive (true);
-					}
-					wallFaces [i].gameObject.GetComponent<Collider> ().enabled = true;
+                    for (int j = 0; j < wallFaces[i].RelatedLine.Doors.Count; j++) {
+                        wallFaces [i].RelatedLine.Doors [j].Door.SetActive (true);
+                    }
+                    for (int j = 0; j < wallFaces[i].RelatedLine.Windows.Count; j++) {
+                        wallFaces [i].RelatedLine.Windows [j].Window.SetActive (true);
+                    }
+                    wallFaces [i].gameObject.GetComponent<Collider> ().enabled = true;
 
                 }
             }
@@ -638,13 +638,13 @@ public class BuildingArea : MonoBehaviour
             {
                 wallFaces[i].Wireframe = false;
                 wallFaces[i].Solid = true;
-				for (int j = 0; j < wallFaces[i].RelatedLine.Doors.Count; j++) {
-					wallFaces [i].RelatedLine.Doors [j].Door.SetActive (true);
-				}
-				for (int j = 0; j < wallFaces[i].RelatedLine.Windows.Count; j++) {
-					wallFaces [i].RelatedLine.Windows [j].Window.SetActive (true);
-				}
-				wallFaces [i].gameObject.GetComponent<Collider> ().enabled = true;
+                for (int j = 0; j < wallFaces[i].RelatedLine.Doors.Count; j++) {
+                    wallFaces [i].RelatedLine.Doors [j].Door.SetActive (true);
+                }
+                for (int j = 0; j < wallFaces[i].RelatedLine.Windows.Count; j++) {
+                    wallFaces [i].RelatedLine.Windows [j].Window.SetActive (true);
+                }
+                wallFaces [i].gameObject.GetComponent<Collider> ().enabled = true;
 
             }
         }
@@ -804,7 +804,7 @@ public class BuildingArea : MonoBehaviour
                     if (snapEnabled)
                     {
                         hit.point = snapToGrid(hit.point);
-                        //						Debug.Log (hit.point);
+                        //                      Debug.Log (hit.point);
                     }
 
                     if (verticesSelected.Count != 0)
@@ -861,8 +861,8 @@ public class BuildingArea : MonoBehaviour
                             lines[lines.Count - 1].Parent = this.transform;
                             pointASelected = false;
                             DraggedLine.Enabled = false;
-                            //							DraggedLine.Destroy ();
-                            //							DraggedLine = null;
+                            //                          DraggedLine.Destroy ();
+                            //                          DraggedLine = null;
 
                             for (int i = 0; i < lines.Count; i++)
                             {
@@ -901,52 +901,52 @@ public class BuildingArea : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.K))
             {
 
-                //				List<Vector3> verts = new List<Vector3> ();
-                //				for (int i = 0; i < lines.Count; i++)
-                //				{
-                //					if (!verts.Contains (lines [i].a))
-                //						verts.Add (lines [i].a);
+                //              List<Vector3> verts = new List<Vector3> ();
+                //              for (int i = 0; i < lines.Count; i++)
+                //              {
+                //                  if (!verts.Contains (lines [i].a))
+                //                      verts.Add (lines [i].a);
                 //
-                //					if (!verts.Contains (lines [i].b))
-                //						verts.Add (lines [i].b);
-                //				}
+                //                  if (!verts.Contains (lines [i].b))
+                //                      verts.Add (lines [i].b);
+                //              }
 
-                //				List<Line> nlines = new List<Line> ();
-                //				{
-                //					List<Vector3> vvv = new List<Vector3> ();
-                //					vvv.Add (new Vector3 (0, 0, 0));
-                //					vvv.Add (new Vector3 (0, 0, -1));
-                //					vvv.Add (new Vector3 (-1, 0, -1));
-                //					vvv.Add (new Vector3 (-1, 0, 0));
-                //					nlines.Add (new Line (vvv, 0, 1, 0.1f, LineMaterial, null, null, null));
-                //					nlines.Add (new Line (vvv, 1, 2, 0.1f, LineMaterial, null, null, null));
-                //					nlines.Add (new Line (vvv, 2, 3, 0.1f, LineMaterial, null, null, null));
-                //					nlines.Add (new Line (vvv, 3, 0, 0.1f, LineMaterial, null, null, null));
-                //				}
+                //              List<Line> nlines = new List<Line> ();
+                //              {
+                //                  List<Vector3> vvv = new List<Vector3> ();
+                //                  vvv.Add (new Vector3 (0, 0, 0));
+                //                  vvv.Add (new Vector3 (0, 0, -1));
+                //                  vvv.Add (new Vector3 (-1, 0, -1));
+                //                  vvv.Add (new Vector3 (-1, 0, 0));
+                //                  nlines.Add (new Line (vvv, 0, 1, 0.1f, LineMaterial, null, null, null));
+                //                  nlines.Add (new Line (vvv, 1, 2, 0.1f, LineMaterial, null, null, null));
+                //                  nlines.Add (new Line (vvv, 2, 3, 0.1f, LineMaterial, null, null, null));
+                //                  nlines.Add (new Line (vvv, 3, 0, 0.1f, LineMaterial, null, null, null));
+                //              }
                 //
 
 
 
 
                 //
-                //				List<int> triangles;
-                //				List<Vector3> vs;
-                //				List<Vector2> uvs;
-                //				List<Vector3> normals;
+                //              List<int> triangles;
+                //              List<Vector3> vs;
+                //              List<Vector2> uvs;
+                //              List<Vector3> normals;
                 //
-                //				Line.FillCap (nlines, out triangles, out vs, out uvs, out normals);
+                //              Line.FillCap (nlines, out triangles, out vs, out uvs, out normals);
                 ////
-                //				Mesh m = new Mesh ();
-                //				m.vertices = vs.ToArray ();
-                //				m.uv = uvs.ToArray ();
-                //				m.triangles = triangles.ToArray ();
-                //				m.normals = normals.ToArray ();
+                //              Mesh m = new Mesh ();
+                //              m.vertices = vs.ToArray ();
+                //              m.uv = uvs.ToArray ();
+                //              m.triangles = triangles.ToArray ();
+                //              m.normals = normals.ToArray ();
 
-                //				GameObject go = new GameObject ("wal");
-                //				go.AddComponent<MeshFilter> ().mesh = m;
-                //				go.AddComponent<UpperWallFace> ().CreateFromLines (nlines);
-                //				MeshRenderer mr = go.AddComponent<MeshRenderer> ();
-                //				mr.material = LineMaterial;
+                //              GameObject go = new GameObject ("wal");
+                //              go.AddComponent<MeshFilter> ().mesh = m;
+                //              go.AddComponent<UpperWallFace> ().CreateFromLines (nlines);
+                //              MeshRenderer mr = go.AddComponent<MeshRenderer> ();
+                //              mr.material = LineMaterial;
 
 
 
@@ -1026,11 +1026,11 @@ public class BuildingArea : MonoBehaviour
 
     Vector3 snapToGrid(Vector3 pos)
     {
-		int divx = (int)((pos.x > 0 ? pos.x + 0.5f * snapGridDistance : pos.x - 0.5f * snapGridDistance) / snapGridDistance);
+        int divx = (int)((pos.x > 0 ? pos.x + 0.5f * snapGridDistance : pos.x - 0.5f * snapGridDistance) / snapGridDistance);
         divx *= snapGridDistance;
-		int divy = (int)((pos.y > 0 ? pos.y + 0.5f * snapGridDistance : pos.y - 0.5f * snapGridDistance) / snapGridDistance);
+        int divy = (int)((pos.y > 0 ? pos.y + 0.5f * snapGridDistance : pos.y - 0.5f * snapGridDistance) / snapGridDistance);
         divy *= snapGridDistance;
-		int divz = (int)((pos.z > 0 ? pos.z + 0.5f * snapGridDistance : pos.z - 0.5f * snapGridDistance) / snapGridDistance);
+        int divz = (int)((pos.z > 0 ? pos.z + 0.5f * snapGridDistance : pos.z - 0.5f * snapGridDistance) / snapGridDistance);
         divz *= snapGridDistance;
 
         pos.x = divx;
@@ -1055,7 +1055,7 @@ public class BuildingArea : MonoBehaviour
         }
         wallFaces.Clear();
         GameObject.Destroy(upperWallFace);
-		upperWallFace = null;
+        upperWallFace = null;
 
         List<WallFace> outerWall;
         List<WallFace> doorSides;
@@ -1063,6 +1063,7 @@ public class BuildingArea : MonoBehaviour
 
 
         List<Mesh> floors;
+
 
 		if (optimize) {
 			Line.OptimizePath (ref lines);
@@ -1153,27 +1154,75 @@ public class BuildingArea : MonoBehaviour
         }
     }
 
-	public void WireFrameWallViewInterior()
-	{
-		//haytham
-		viewingMode = ViewingMode.Interior;
+    public void WireFrameWallViewInterior()
+    {
+        //haytham
+        viewingMode = ViewingMode.Interior;
 
-	}
+    }
 
-	public void WireFrameWallViewExterior()
-	{
-		viewingMode = ViewingMode.Exterior;
-
-	}
+    public void WireFrameWallViewExterior()
+    {
+        viewingMode = ViewingMode.Exterior;
+    }
 
     public void SetRoofMaterial(Material Mat)
     {
         if (Mat != null)
-        	Roof.GetComponent<MeshRenderer>().material = Mat;   
-
+            Roof.GetComponent<MeshRenderer>().material = Mat;
+        DefaultRoofMaterial = Mat;
     }
-		
+
+
+    public void SetOuterWallMaterial(Material Mat)
+    {
+        if (Mat != null)
+        {
+            SetSelectedWallFaceMaterials(DefaultInnerWallMaterial,Mat,DefaultSideMaterial);
+        }
+    }
+
+
+    public void GetWallArea()
+    {
+        float wallSum = 0;
+        wallSum+=(selectedWallFace.RelatedLine.a - selectedWallFace.RelatedLine.b).magnitude;
+        wallSum *= selectedWallFace.Height;
+        Debug.Log ("the area of the wall = " + wallSum +" M");
+    }
+
+    public void GetAllWindowArea()
+    {
+        float windowSum = 0;
+        float h , w;
+        for (int i = 0; i <selectedWallFace.RelatedLine.Windows.Count ; i++) 
+        {
+            h = selectedWallFace.RelatedLine.Windows [i].WindowHeight;
+            w = selectedWallFace.RelatedLine.Windows [i].WindowWidth;
+            windowSum += (h * w);
+        }
+        Debug.Log ("The area of all windows at this wall ="+ windowSum);
+    }
+
+
+    public void GetAllDoorArea()
+    {
+        float doorSum = 0;
+        float h , w;
+        for (int i = 0; i <selectedWallFace.RelatedLine.Doors.Count ; i++) 
+        {
+            h = selectedWallFace.RelatedLine.Doors [i].DoorHeight;
+            w = selectedWallFace.RelatedLine.Doors [i].DoorWidth;
+            doorSum += (h * w);
+        }
+        Debug.Log ("The area of all doors at this wall ="+ doorSum);
+    }
+
+
+    public void GetWallThickness()
+    {
+        float th = selectedWallFace.RelatedLine.Thickness;
+        Debug.Log ("the thickness of this wall =" + th);
+    }
 
 }
-
-
