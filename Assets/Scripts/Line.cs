@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -1172,12 +1172,6 @@ public class Line
 
             Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), 0, Random.Range(10000.0f, 50000.0f));
 
-
-
-			Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), 0, Random.Range(10000.0f, 50000.0f));
-
-
-
             int intersectionCount = 0;
             for (int j = 0; j < directedPaths.Count; j++)
             {
@@ -1601,198 +1595,182 @@ public class Line
 		}
 		throw new UnityException ("Unable to fill cap");
 	}
-    private static void _FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
-    {
-        int tries = 5;
-        while (tries > 0) {
-            try
-            {
-                _FillCap(_lines, out triangles, out verts, out uvs, out normals);
-                return;
-            }
-            catch {
-            }
-            tries--;
-        }
-        throw new UnityException ("Unable to fill cap");
-    }
-    private static void _FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
-    {
+	private static void _FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
+	{
 
-        List<Line> lines = new List<Line> (_lines);
-        OptimizePath (ref lines);
+		List<Line> lines = new List<Line> (_lines);
+		OptimizePath (ref lines);
 
-        if (lines.Count < 3)
-            throw new UnityException("lines are less than 3");
+		if (lines.Count < 3)
+			throw new UnityException("lines are less than 3");
 
 
 
 
-        // outerEdge1, outerEdge2 any 2 connected edges where the angle less than 180
-        int e1 = -1;
-        int[] e2 = { -1, -1 };
+		// outerEdge1, outerEdge2 any 2 connected edges where the angle less than 180
+		int e1 = -1;
+		int[] e2 = { -1, -1 };
 
 
 
-        List<Line> list = new List<Line>(lines);
-        triangles = new List<int>();
+		List<Line> list = new List<Line>(lines);
+		triangles = new List<int>();
 
 
-        int eeee = 0;
-        while (list.Count > 2)
-        {
+		int eeee = 0;
+		while (list.Count > 2)
+		{
 			if (eeee > lines.Count * 5)
-            {
+			{
 
-                throw new UnityException("!!");
-            }
-            eeee++;
-            e1 = Random.Range(0, list.Count);
-            Vector3[] middlePoint = { Vector3.zero, Vector3.zero };
-            Vector3[] x1 = { Vector3.zero, Vector3.zero };
-            Vector3[] x2 = { Vector3.zero, Vector3.zero };
-            int[] ix1 = { -1, -1 };
-            int[] ix2 = { -1, -1 };
-            int e2index = 0;
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (i != e1)
-                {
+				throw new UnityException("!!");
+			}
+			eeee++;
+			e1 = Random.Range(0, list.Count);
+			Vector3[] middlePoint = { Vector3.zero, Vector3.zero };
+			Vector3[] x1 = { Vector3.zero, Vector3.zero };
+			Vector3[] x2 = { Vector3.zero, Vector3.zero };
+			int[] ix1 = { -1, -1 };
+			int[] ix2 = { -1, -1 };
+			int e2index = 0;
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (i != e1)
+				{
 					if (Mathf.Abs(Mathf.Abs(Vector3.Dot((list[i].a - list[i].b).normalized, (list[e1].a - list[e1].b).normalized)) - 1.0f) <= epsilon)
-                        continue;
+						continue;
 
 					if ((list[i].a - list[e1].a).sqrMagnitude < epsilon)
-                    {
-                        e2[e2index] = i;
-                        middlePoint[e2index] = (list[i].b + list[e1].b) * 0.5f;
-                        x1[e2index] = list[i].b;
-                        x2[e2index] = list[e1].b;
-                        ix1[e2index] = list[i].bID;
-                        ix2[e2index] = list[e1].bID;
-                        e2index++;
-                        if (e2index == 2)
-                            break;
-                    }
+					{
+						e2[e2index] = i;
+						middlePoint[e2index] = (list[i].b + list[e1].b) * 0.5f;
+						x1[e2index] = list[i].b;
+						x2[e2index] = list[e1].b;
+						ix1[e2index] = list[i].bID;
+						ix2[e2index] = list[e1].bID;
+						e2index++;
+						if (e2index == 2)
+							break;
+					}
 					if ((list[i].a - list[e1].b).sqrMagnitude < epsilon)
-                    {
-                        e2[e2index] = i;
-                        middlePoint[e2index] = (list[i].b + list[e1].a) * 0.5f;
-                        x1[e2index] = list[i].b;
-                        x2[e2index] = list[e1].a;
-                        ix1[e2index] = list[i].bID;
-                        ix2[e2index] = list[e1].aID;
-                        e2index++;
-                        if (e2index == 2)
-                            break;
-                    }
+					{
+						e2[e2index] = i;
+						middlePoint[e2index] = (list[i].b + list[e1].a) * 0.5f;
+						x1[e2index] = list[i].b;
+						x2[e2index] = list[e1].a;
+						ix1[e2index] = list[i].bID;
+						ix2[e2index] = list[e1].aID;
+						e2index++;
+						if (e2index == 2)
+							break;
+					}
 					if ((list[i].b - list[e1].a).sqrMagnitude < epsilon)
-                    {
-                        e2[e2index] = i;
-                        middlePoint[e2index] = (list[i].a + list[e1].b) * 0.5f;
-                        x1[e2index] = list[i].a;
-                        x2[e2index] = list[e1].b;
-                        ix1[e2index] = list[i].aID;
-                        ix2[e2index] = list[e1].bID;
-                        e2index++;
-                        if (e2index == 2)
-                            break;
-                    }
+					{
+						e2[e2index] = i;
+						middlePoint[e2index] = (list[i].a + list[e1].b) * 0.5f;
+						x1[e2index] = list[i].a;
+						x2[e2index] = list[e1].b;
+						ix1[e2index] = list[i].aID;
+						ix2[e2index] = list[e1].bID;
+						e2index++;
+						if (e2index == 2)
+							break;
+					}
 					if ((list[i].b - list[e1].b).sqrMagnitude < epsilon)
-                    {
-                        e2[e2index] = i;
-                        middlePoint[e2index] = (list[i].a + list[e1].a) * 0.5f;
-                        x1[e2index] = list[i].a;
-                        x2[e2index] = list[e1].a;
-                        ix1[e2index] = list[i].aID;
-                        ix2[e2index] = list[e1].aID;
-                        e2index++;
-                        if (e2index == 2)
-                            break;
-                    }
-                }
-            }
+					{
+						e2[e2index] = i;
+						middlePoint[e2index] = (list[i].a + list[e1].a) * 0.5f;
+						x1[e2index] = list[i].a;
+						x2[e2index] = list[e1].a;
+						ix1[e2index] = list[i].aID;
+						ix2[e2index] = list[e1].aID;
+						e2index++;
+						if (e2index == 2)
+							break;
+					}
+				}
+			}
 
-            if (e2[0] == -1)
-                continue;
-			
+			if (e2[0] == -1)
+				continue;
 
-            int[] intersectionCount = { 0, 0 };
-            HashSet<int> e2indices = new HashSet<int>();
+
+			int[] intersectionCount = { 0, 0 };
+			HashSet<int> e2indices = new HashSet<int>();
 			Vector3 randomOutterVector = new Vector3 (Random.Range(5000.0f, 10000.0f), 0, Random.Range(5000.0f, 10000.0f));
-            for (int i = 0; i < e2index; i++)
-            {
-                bool flag = true;
+			for (int i = 0; i < e2index; i++)
+			{
+				bool flag = true;
 
-                for (int k = 0; k < lines.Count; ++k)
-                {
+				for (int k = 0; k < lines.Count; ++k)
+				{
 
-                    Vector3 tmp;
-                    if (RayRayIntersection(out tmp, x1[i], x2[i], lines[k].a, lines[k].b))
-                    {
+					Vector3 tmp;
+					if (RayRayIntersection(out tmp, x1[i], x2[i], lines[k].a, lines[k].b))
+					{
 						float dst = (tmp - x1 [i]).sqrMagnitude;
 						if (dst < (x2[i] - x1[i]).sqrMagnitude && dst > epsilon)
-                        {
+						{
 							if (Vector3.Dot(tmp - x1[i], (x2[i] - x1[i]).normalized) >= 0)
-                            {
+							{
 								if (Mathf.Abs((tmp - lines[k].a).magnitude + (tmp - lines[k].b).magnitude - (lines[k].a - lines[k].b).magnitude) <= epsilon)
-                                {
+								{
 									if ((tmp - lines [k].a).sqrMagnitude > epsilon && (tmp - lines [k].b).sqrMagnitude > epsilon)
 									{
-//										if (eeee > 1000 && eeee < 1100) {
-//											{
-//												string sssss = ("e1 = " + e1 + "e2[] = " + e2 [0] + "" + e2 [1] + "\n");
-//
-//												for (int kkk = 0; kkk < lines.Count; ++kkk) {
-//													sssss += (lines [kkk].a.x + "\t" + lines [kkk].a.z + "\t" + (kkk * 2) + "\n");
-//													sssss += (lines [kkk].b.x + "\t" + lines [kkk].b.z + "\t" + (kkk * 2 + 1) + "\n");
-//												}
-//												sssss += "REFUSED " + x1 [i] + " " + x2 [i] + "\n";
-//												sssss += ("____\n");
-//												Debug.Log (msgCount + "\n" + sssss);
-//												msgCount++;
-//											}
-//										}
+										//										if (eeee > 1000 && eeee < 1100) {
+										//											{
+										//												string sssss = ("e1 = " + e1 + "e2[] = " + e2 [0] + "" + e2 [1] + "\n");
+										//
+										//												for (int kkk = 0; kkk < lines.Count; ++kkk) {
+										//													sssss += (lines [kkk].a.x + "\t" + lines [kkk].a.z + "\t" + (kkk * 2) + "\n");
+										//													sssss += (lines [kkk].b.x + "\t" + lines [kkk].b.z + "\t" + (kkk * 2 + 1) + "\n");
+										//												}
+										//												sssss += "REFUSED " + x1 [i] + " " + x2 [i] + "\n";
+										//												sssss += ("____\n");
+										//												Debug.Log (msgCount + "\n" + sssss);
+										//												msgCount++;
+										//											}
+										//										}
 										flag = false;
 										break;
 									}
-                                }
-                            }
-                        }
-                    }
+								}
+							}
+						}
+					}
 					if (RayRayIntersection(out tmp, lines[k].a, lines[k].b, middlePoint[i], randomOutterVector))
-                    {
+					{
 						if ((tmp - randomOutterVector).magnitude <= (middlePoint[i] - randomOutterVector).magnitude)
-                        {
+						{
 							if (Mathf.Abs((tmp - lines[k].a).magnitude + (tmp - lines[k].b).magnitude - (lines[k].b - lines[k].a).magnitude) <= epsilon)
-                            {
+							{
 								if ((tmp - lines [k].a).sqrMagnitude > epsilon && (tmp - lines [k].b).sqrMagnitude > epsilon) {
 									if (Vector3.Dot (tmp - lines [k].a, lines [k].b - lines [k].a) >= 0) {
 										intersectionCount [i]++;
 									}
 								}
-                            }
-                        }
-                    }
-                }
-                if (flag)
-                {
-                    e2indices.Add(i);
-                }
-            }
+							}
+						}
+					}
+				}
+				if (flag)
+				{
+					e2indices.Add(i);
+				}
+			}
 
-            if (e2index == -1)
-                continue;
+			if (e2index == -1)
+				continue;
 
-            // if (ray cast count middle to infinite % 2 == 1 break
-            if (e2indices.Contains(0) && intersectionCount[0] % 2 == 1)
-            {
-                //              triangles.Add (ix1);
-                //              triangles.Add (list [e1].aID == ix1 ? list [e1].bID : list [e1].aID);
-                //              triangles.Add (ix2);
-                HashSet<int> abc = new HashSet<int>() { ix1[0], ix2[0], list[e1].aID, list[e1].bID };
-//                if (abc.Count == 3)
-                triangles.AddRange(abc);
-
+			// if (ray cast count middle to infinite % 2 == 1 break
+			if (e2indices.Contains(0) && intersectionCount[0] % 2 == 1)
+			{
+				//				triangles.Add (ix1);
+				//				triangles.Add (list [e1].aID == ix1 ? list [e1].bID : list [e1].aID);
+				//				triangles.Add (ix2);
+				HashSet<int> abc = new HashSet<int>() { ix1[0], ix2[0], list[e1].aID, list[e1].bID };
+				//                if (abc.Count == 3)
+				triangles.AddRange(abc);
 				if (abc.Count != 3) {
 
 
@@ -1802,25 +1780,24 @@ public class Line
 
 
 
-                list.RemoveAt(Mathf.Max(e1, e2[0]));
-                list.RemoveAt(Mathf.Min(e1, e2[0]));
-                // if new line not already exist
-                if (list.FindIndex(delegate (Line obj) {
-                    return (obj.aID == ix1[0] && obj.bID == ix2[0]) || (obj.aID == ix2[0] && obj.bID == ix1[0]);
-                }) == -1)
-                    list.Add(new Line(list[0].Vertices, ix1[0], ix2[0], 1, null, null, null, null));
-                continue;
-            }
+				list.RemoveAt(Mathf.Max(e1, e2[0]));
+				list.RemoveAt(Mathf.Min(e1, e2[0]));
+				// if new line not already exist
+				if (list.FindIndex(delegate (Line obj) {
+					return (obj.aID == ix1[0] && obj.bID == ix2[0]) || (obj.aID == ix2[0] && obj.bID == ix1[0]);
+				}) == -1)
+					list.Add(new Line(list[0].Vertices, ix1[0], ix2[0], 1, null, null, null, null));
+				continue;
+			}
 
-            if (e2indices.Contains(1) && intersectionCount[1] % 2 == 1)
-            {
-                //              triangles.Add (ix1);
-                //              triangles.Add (list [e1].aID == ix1 ? list [e1].bID : list [e1].aID);
-                //              triangles.Add (ix2);
-                HashSet<int> abc = new HashSet<int>() { ix1[1], ix2[1], list[e1].aID, list[e1].bID };
-//                if (abc.Count == 3)
-                triangles.AddRange(abc);
-
+			if (e2indices.Contains(1) && intersectionCount[1] % 2 == 1)
+			{
+				//				triangles.Add (ix1);
+				//				triangles.Add (list [e1].aID == ix1 ? list [e1].bID : list [e1].aID);
+				//				triangles.Add (ix2);
+				HashSet<int> abc = new HashSet<int>() { ix1[1], ix2[1], list[e1].aID, list[e1].bID };
+				//                if (abc.Count == 3)
+				triangles.AddRange(abc);
 				if (abc.Count != 3) {
 
 
@@ -1829,87 +1806,82 @@ public class Line
 
 
 
-                list.RemoveAt(Mathf.Max(e1, e2[1]));
-                list.RemoveAt(Mathf.Min(e1, e2[1]));
-                // if new line not already exist
-                if (list.FindIndex(delegate (Line obj) {
-                    return (obj.aID == ix1[1] && obj.bID == ix2[1]) || (obj.aID == ix2[1] && obj.bID == ix1[1]);
-                }) == -1)
-                    list.Add(new Line(list[1].Vertices, ix1[1], ix2[1], 1, null, null, null, null));
-                continue;
-            }
+				list.RemoveAt(Mathf.Max(e1, e2[1]));
+				list.RemoveAt(Mathf.Min(e1, e2[1]));
+				// if new line not already exist
+				if (list.FindIndex(delegate (Line obj) {
+					return (obj.aID == ix1[1] && obj.bID == ix2[1]) || (obj.aID == ix2[1] && obj.bID == ix1[1]);
+				}) == -1)
+					list.Add(new Line(list[1].Vertices, ix1[1], ix2[1], 1, null, null, null, null));
+				continue;
+			}
 
-            if (list.Count <= 3)
-            {
+			if (list.Count <= 3)
+			{
 
-                //              triangles.Add (list [0].aID);
-                //              triangles.Add (list [0].bID);
-                //              triangles.Add (list [1].aID == list [0].aID ? list [1].bID : list [1].aID);
+				//				triangles.Add (list [0].aID);
+				//				triangles.Add (list [0].bID);
+				//				triangles.Add (list [1].aID == list [0].aID ? list [1].bID : list [1].aID);
 
-                HashSet<int> abc = new HashSet<int>() { list[0].aID, list[0].bID, list[1].aID, list[1].bID };
-
-//				if (abc.Count == 3)
-                triangles.AddRange(abc);
+				HashSet<int> abc = new HashSet<int>() { list[0].aID, list[0].bID, list[1].aID, list[1].bID };
+				//				if (abc.Count == 3)
+				triangles.AddRange(abc);
 				if (abc.Count != 3) {
+
 
 					Debug.Log ("abc != 3");
 
 				}
-	
-
-                    Debug.Log ("abc != 3");
-
-                }
-    
-
-                //              for (int i = 0; i < triangles.Count; i += 3) {
-                //                  Debug.Log (triangles [i] + " " + triangles [i + 1] + " " + triangles [i + 2] + "\n");
-                //              }
-                break;
-            }
-        }
 
 
-        verts = new List<Vector3>();
-        normals = new List<Vector3>();
-        uvs = new List<Vector2>();
-        {
-            int count = 0;
-            for (int i = 0; i < triangles.Count; i++)
-                count = Mathf.Max(count, triangles[i]);
-
-            count++;
-            for (int i = 0; i < count; i++)
-            {
-                verts.Add(lines[0].Vertices[i]);
-                normals.Add(Vector3.up);
-                uvs.Add(new Vector2(verts[i].x, verts[i].z));
-            }
+				//				for (int i = 0; i < triangles.Count; i += 3) {
+				//					Debug.Log (triangles [i] + " " + triangles [i + 1] + " " + triangles [i + 2] + "\n");
+				//				}
+				break;
+			}
+		}
 
 
-//			while (triangles.Count % 3 != 0)
-//				triangles.RemoveAt (triangles.Count - 1);
-			
+		verts = new List<Vector3>();
+		normals = new List<Vector3>();
+		uvs = new List<Vector2>();
+		{
+			int count = 0;
+			for (int i = 0; i < triangles.Count; i++)
+				count = Mathf.Max(count, triangles[i]);
 
-            for (int i = 0; i < triangles.Count; i += 3)
-            {
-                if (i + 2 >= triangles.Count)
-                {
-                    i--;
+			count++;
+			for (int i = 0; i < count; i++)
+			{
+				verts.Add(lines[0].Vertices[i]);
+				normals.Add(Vector3.up);
+				uvs.Add(new Vector2(verts[i].x, verts[i].z));
+			}
+
+
+			//			while (triangles.Count % 3 != 0)
+			//				triangles.RemoveAt (triangles.Count - 1);
+
+
+			for (int i = 0; i < triangles.Count; i += 3)
+			{
+				if (i + 2 >= triangles.Count)
+				{
+					i--;
 					break;
-                }
-                Plane p = new Plane(verts[triangles[i]], verts[triangles[i + 1]], verts[triangles[i + 2]]);
-                if (Vector3.Dot(p.normal, Vector3.up) < 0)
-                {
-                    int tmp = triangles[i];
-                    triangles[i] = triangles[i + 2];
-                    triangles[i + 2] = tmp;
-                }
-            }
-        }
+				}
+				Plane p = new Plane(verts[triangles[i]], verts[triangles[i + 1]], verts[triangles[i + 2]]);
+				if (Vector3.Dot(p.normal, Vector3.up) < 0)
+				{
+					int tmp = triangles[i];
+					triangles[i] = triangles[i + 2];
+					triangles[i + 2] = tmp;
+				}
+			}
+		}
 
 
 
-    }
+	}
 
 }
