@@ -55,6 +55,7 @@ public class BuildingArea : MonoBehaviour
             return _viewingMode;
         }
         set {
+<<<<<<< HEAD
             _viewingMode = value;
             if (_viewingMode == ViewingMode.Interior) {
                 if (Roof != null)
@@ -64,6 +65,17 @@ public class BuildingArea : MonoBehaviour
                     Roof.SetActive (true);
             }
         }
+=======
+			_viewingMode = value;
+			if (_viewingMode == ViewingMode.Interior) {
+				if (Roof != null)
+					Roof.SetActive (false);
+			} else {
+				if (Roof != null)
+					Roof.SetActive (true);
+			}
+		}
+>>>>>>> master
     }
 
 
@@ -150,9 +162,15 @@ public class BuildingArea : MonoBehaviour
 
     private List<Vector3> lineVertices = new List<Vector3>();
     public List<Line> lines = new List<Line>();
+<<<<<<< HEAD
     private List<GameObject> floors = new List<GameObject>();
     private List<Collider> floorColliders = new List<Collider> ();
     private GameObject Roof;
+=======
+	private List<GameObject> floors = new List<GameObject>();
+	private List<Collider> floorColliders = new List<Collider> ();
+	private GameObject Roof;
+>>>>>>> master
 
     List<int> verticesSelected = new List<int>();
 
@@ -319,7 +337,11 @@ public class BuildingArea : MonoBehaviour
 
     public void DeleteSelectedWall()
     {
+<<<<<<< HEAD
         selectedWallFace.RelatedLine.Destroy ();
+=======
+		selectedWallFace.RelatedLine.Destroy ();
+>>>>>>> master
         lines.Remove(selectedWallFace.RelatedLine);
         selectedWallFace = null;
         regeneratePath(true);
@@ -352,7 +374,11 @@ public class BuildingArea : MonoBehaviour
                     {
                         lines[j].InnerMaterial = innerMaterial;
                         lines[j].OuterMaterial = outerMaterial;
+<<<<<<< HEAD
                         lines [j].SideMaterial = sideMaterial;
+=======
+						lines [j].SideMaterial = sideMaterial;
+>>>>>>> master
                         endpoints.Add(lines[j].a);
                     }
                 }
@@ -492,6 +518,7 @@ public class BuildingArea : MonoBehaviour
     {
         while (maxTries >= 0)
         {
+<<<<<<< HEAD
             bool flag = false;
             int floorID = -1;
             RaycastHit hp = new RaycastHit();
@@ -522,6 +549,38 @@ public class BuildingArea : MonoBehaviour
 
             if (!flag)
                 return null;
+=======
+			bool flag = false;
+			int floorID = -1;
+			RaycastHit hp = new RaycastHit();
+
+			for (int i = 0; i < floorColliders.Count; i++)
+			{
+				bool wasEnabled = floorColliders [i].enabled;
+				floorColliders [i].enabled = true;
+				int tmp = 0;
+//				RaycastHit hp;
+				if (!floorColliders[i].Raycast (new Ray (new Vector3(aabb.min.x, aabb.max.y, aabb.min.z), Vector3.down), out hp, float.MaxValue))
+					tmp++;
+				if (!floorColliders[i].Raycast (new Ray (aabb.max, Vector3.down), out hp, float.MaxValue))
+					tmp++;
+				if (!floorColliders[i].Raycast (new Ray (new Vector3 (aabb.min.x, aabb.max.y, aabb.max.z), Vector3.down), out hp, float.MaxValue))
+					tmp++;
+				if (!floorColliders[i].Raycast (new Ray (new Vector3 (aabb.max.x, aabb.max.y, aabb.min.z), Vector3.down), out hp, float.MaxValue))
+					tmp++;
+
+				if (tmp == 0) {
+					floorID = i;
+					flag = true;
+					floorColliders [i].enabled = wasEnabled;
+					break;
+				}
+				floorColliders [i].enabled = wasEnabled;
+			}
+
+			if (!flag)
+				return null;
+>>>>>>> master
 
 
 
@@ -534,6 +593,7 @@ public class BuildingArea : MonoBehaviour
 //            if (!BuildingAreaCollider.Raycast(new Ray(new Vector3(aabb.max.x, aabb.min.y, aabb.min.z), Vector3.down), out hp, float.MaxValue))
 //                return null;
 
+<<<<<<< HEAD
             {
                 bool wasEnabled = floorColliders [floorID].enabled;
                 floorColliders [floorID].enabled = true;
@@ -543,6 +603,17 @@ public class BuildingArea : MonoBehaviour
                 floorColliders [floorID].enabled = wasEnabled;
             }
                 
+=======
+			{
+				bool wasEnabled = floorColliders [floorID].enabled;
+				floorColliders [floorID].enabled = true;
+				if (floorColliders [floorID].Raycast (new Ray (aabb.min, Vector3.down), out hp, float.MaxValue)) {
+					aabb.center += Vector3.down * hp.distance;
+				}
+				floorColliders [floorID].enabled = wasEnabled;
+			}
+				
+>>>>>>> master
 
             Bounds oldAABB = aabb;
             aabb = alignToFloor(aabb);
@@ -650,6 +721,7 @@ public class BuildingArea : MonoBehaviour
         }
 
         //if (!planningMode) 
+<<<<<<< HEAD
         {
 
             switch (Mode) {
@@ -788,6 +860,146 @@ public class BuildingArea : MonoBehaviour
 
 
         }
+=======
+		{
+
+			switch (Mode) {
+			case BuildingEditMode.None:
+				{
+					if (Input.GetMouseButtonUp (0)) {
+
+						if (SelectedItem == null) {
+
+							WallFace wallface = getSelectedWallFace ();
+							if (wallface != null) {
+								selectedWallFace = wallface;
+								Mode = BuildingEditMode.WallFaceSelected;
+							}
+						} else {
+
+							for (int i = 0; i < floorColliders.Count; i++) {
+								floorColliders [i].enabled = true;
+							}
+
+							if (SelectedItem.itemType == type.Window || SelectedItem.itemType == type.Door) {
+								WallFace wallface = getSelectedWallFace ();
+								if (wallface != null) {
+									Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+									RaycastHit hit;
+									if (Physics.Raycast (ray, out hit, float.MaxValue) && !EventSystem.current.IsPointerOverGameObject ()) {
+										Vector2 location;
+										Vector2? correctedLocation;
+										if (wallface.RelatedLine.LocateItemInWall (hit.point, SelectedItem, out location, 100, out correctedLocation)) {
+											if (SelectedItem.itemType == type.Window) {
+												wallface.RelatedLine.Windows.Add (new WallWindow (wallface.RelatedLine, location, SelectedItem.prefabItem.Size.z, SelectedItem.prefabItem.Size.y, Instantiate (SelectedItem.prefabItem.gameObject)));
+												regeneratePath (false);
+											} else if (SelectedItem.itemType == type.Door) {
+												wallface.RelatedLine.Doors.Add (new WallDoor (wallface.RelatedLine, location.x, SelectedItem.prefabItem.Size.z, SelectedItem.prefabItem.Size.y, Instantiate (SelectedItem.prefabItem.gameObject)));
+												regeneratePath (false);
+											}
+										} else if (correctedLocation.HasValue) {
+											if (SelectedItem.itemType == type.Window) {
+												wallface.RelatedLine.Windows.Add (new WallWindow (wallface.RelatedLine, correctedLocation.Value, SelectedItem.prefabItem.Size.z, SelectedItem.prefabItem.Size.y, Instantiate (SelectedItem.prefabItem.gameObject)));
+												regeneratePath (false);
+											} else if (SelectedItem.itemType == type.Door) {
+												wallface.RelatedLine.Doors.Add (new WallDoor (wallface.RelatedLine, correctedLocation.Value.x, SelectedItem.prefabItem.Size.z, SelectedItem.prefabItem.Size.y, Instantiate (SelectedItem.prefabItem.gameObject)));
+												regeneratePath (false);
+											}
+										}
+									}
+								}
+							} else { // not window and not door
+
+								Vector3 location;
+								Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+								RaycastHit hit;
+								if (Physics.Raycast (ray, out hit, float.MaxValue) && !EventSystem.current.IsPointerOverGameObject ()) {
+									location = hit.point - ray.direction * SelectedItem.prefabItem.Size.z * 0.5f;
+									if (SelectedItem.alignToFloor) {
+										RaycastHit floorHit;
+										if (hit.collider.Raycast (new Ray (location, Vector3.down), out floorHit, float.MaxValue)) {
+											Bounds aabb = new Bounds (floorHit.point + Vector3.up * SelectedItem.prefabItem.Size.y, SelectedItem.prefabItem.Size);
+											 
+											Bounds? nAABB = alignToFloor (aabb, 10);
+											if (nAABB.HasValue) {
+												GameObject go = Instantiate (SelectedItem.prefabItem.gameObject);
+												PrefabItem pItem = go.GetComponent<PrefabItem> ();
+												Draggable draggable = go.AddComponent<Draggable> ();
+												draggable.XEnabled = true;
+												draggable.YEnabled = false;
+												draggable.ZEnabled = true;
+												draggable.XSnapDistance = 0;
+												draggable.ZSnapDistance = 0;
+												draggable.Enabled = true;
+												draggable.StartMoving += delegate(GameObject sender, Vector3 oldPosition, Vector3 newPosition) {
+													Bounds _aabb = new Bounds (newPosition + Vector3.up * pItem.Size.y, pItem.Size);
+													Debug.Log ("start " + newPosition);
+													Bounds? _nAABB = alignToFloor (_aabb, 10);
+													if (_nAABB != null)
+														sender.transform.position = newPosition;
+												};
+												draggable.Moving += delegate(GameObject sender, Vector3 oldPosition, Vector3 newPosition) {
+													Bounds _aabb = new Bounds (newPosition + Vector3.up * pItem.Size.y, pItem.Size);
+												
+													Bounds? _nAABB = alignToFloor (_aabb, 10);
+													if (_nAABB != null)
+														sender.transform.position = newPosition;
+												};
+												draggable.EndMoving += delegate(GameObject sender, Vector3 oldPosition, Vector3 newPosition) {
+													Bounds _aabb = new Bounds (newPosition + Vector3.up * pItem.Size.y, pItem.Size);
+													Debug.Log ("end " + newPosition);
+
+													Bounds? _nAABB = alignToFloor (_aabb, 10);
+													if (_nAABB != null)
+														sender.transform.position = newPosition;
+												};
+
+
+												go.transform.position = nAABB.Value.center;
+												items.Add (go);
+											}
+										}
+									}
+								}
+							}
+
+							for (int i = 0; i < floorColliders.Count; i++) {
+								floorColliders [i].enabled = false;
+							}
+
+						}
+
+
+					}
+				}
+				break;
+			case BuildingEditMode.WallFaceSelected:
+				{
+					if (Input.GetMouseButtonUp (0) && getSelectedWallFace () != null) {
+						selectedWallFace = null;
+						Mode = BuildingEditMode.None;
+					}
+				}
+				break;
+			case BuildingEditMode.WallFaceMoving:
+				{
+				}
+				break;
+			}
+
+			if (Input.GetMouseButtonDown (0)) {
+				if (selectedWallFace != null) {
+					cameraTarget = (selectedWallFace.a + selectedWallFace.b) * 0.5f + Vector3.up * selectedWallFace.Height * 0.5f;
+				}
+				if (Time.time - lastClickTime < DoubleClickCatchTime) {
+					gameCamera.TargetObject = cameraTarget;
+				}
+				lastClickTime = Time.time;
+			}
+
+
+		}
+>>>>>>> master
         //else 
         {
 
@@ -977,6 +1189,7 @@ public class BuildingArea : MonoBehaviour
         return selectedFace;
     }
 
+<<<<<<< HEAD
     public Mesh GetCeil()
     {
         Mesh m = new Mesh ();
@@ -994,6 +1207,25 @@ public class BuildingArea : MonoBehaviour
 
         return m;
     }
+=======
+	public Mesh GetCeil()
+	{
+		Mesh m = new Mesh ();
+		List<CombineInstance> meshes = new List<CombineInstance> ();
+		for (int i = 0; i < floors.Count; i++) {
+			CombineInstance ci = new CombineInstance ();
+			ci.mesh = floors [i].GetComponent<MeshFilter> ().mesh;
+			meshes.Add (ci);
+		}
+		m.CombineMeshes (meshes.ToArray ());
+
+		for (int i = 0; i < m.vertices.Length; i++) {
+			m.vertices [i] += Vector3.up * lines [0].Height;
+		}
+
+		return m;
+	}
+>>>>>>> master
 
     //List<Vector3> vlines = new List<Vector3>();
     bool snap(Vector3 pos, float maxlength, out Vector3 nearest)
@@ -1064,6 +1296,7 @@ public class BuildingArea : MonoBehaviour
 
         List<Mesh> floors;
 
+<<<<<<< HEAD
         if (optimize) {
             Line.OptimizePath (ref lines);
         }
@@ -1109,6 +1342,53 @@ public class BuildingArea : MonoBehaviour
         }
         catch {
         }
+=======
+		if (optimize) {
+			Line.OptimizePath (ref lines);
+		}
+
+		Line.Generate3DWallFacesFromLines(lines, WallWireframeMaterial, WallSelectedMaterial, out outerWall, out doorSides, out innerWall, out upperWallFace, out floors);
+
+		try{
+
+	        //		gggg (lines, WallWireframeMaterial, WallSelectedMaterial, out outerWall, out doorSides, out innerWall, out upperWallFace, out floors);
+
+
+			for (int i = 0; i < this.floors.Count; i++)
+			{
+				GameObject.Destroy(this.floors[i]);
+			}
+
+			this.floors.Clear();
+			this.floorColliders.Clear();
+
+	        for (int i = 0; i < floors.Count; i++)
+	        {
+	            GameObject floor = new GameObject("Room" + i.ToString() + "Floor");
+				floor.transform.position += Vector3.up * 0.001f;
+	            floor.AddComponent<MeshFilter>().mesh = floors[i];
+				floor.AddComponent<MeshRenderer>().material = DefaultFloorMaterial;
+				floorColliders.Add(floor.AddComponent<MeshCollider>());
+				floorColliders[i].enabled = false;
+	            floor.transform.parent = this.transform;
+				this.floors.Add(floor);
+			}
+
+			if (Roof != null){
+				GameObject.Destroy(Roof);
+				Roof = null;
+			}
+
+			Roof = new GameObject("roof");
+			Roof.AddComponent<Roof>().CreateFromLines(lines, 0.4f, 0.4f);
+			Roof.transform.parent = transform;
+			Roof.GetComponent<MeshRenderer>().material = DefaultRoofMaterial;
+			if (_viewingMode == ViewingMode.Interior)
+				Roof.SetActive (false);
+		}
+		catch {
+		}
+>>>>>>> master
 
         for (int i = 0; i < outerWall.Count; i++)
         {
@@ -1168,9 +1448,13 @@ public class BuildingArea : MonoBehaviour
     public void SetRoofMaterial(Material Mat)
     {
         if (Mat != null)
+<<<<<<< HEAD
             Roof.GetComponent<MeshRenderer>().material = Mat;
         DefaultRoofMaterial = Mat;
     }
+=======
+        	Roof.GetComponent<MeshRenderer>().material = Mat;   
+>>>>>>> master
 
     public void SetOuterWallMaterial(Material Mat)
     {

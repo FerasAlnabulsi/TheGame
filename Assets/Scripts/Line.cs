@@ -35,16 +35,28 @@ public class Line
         set
         {
             Vertices[_a] = value;
+<<<<<<< HEAD
             if (lr != null)
                 lr.SetPosition (0, Vertices [_a]);
+=======
+			if (lr != null)
+				lr.SetPosition (0, Vertices [_a]);
+>>>>>>> master
             for (int i = 0; i < Windows.Count; i++)
             {
                 Windows[i].Update();
             }
+<<<<<<< HEAD
             for (int i = 0; i < Doors.Count; i++)
             {
                 Doors[i].Update();
             }
+=======
+			for (int i = 0; i < Doors.Count; i++)
+			{
+				Doors[i].Update();
+			}
+>>>>>>> master
         }
     }
     public Vector3 b
@@ -56,16 +68,28 @@ public class Line
         set
         {
             Vertices[_b] = value;
+<<<<<<< HEAD
             if (lr != null)
                 lr.SetPosition (1, Vertices [_b]);
+=======
+			if (lr != null)
+				lr.SetPosition (1, Vertices [_b]);
+>>>>>>> master
             for (int i = 0; i < Windows.Count; i++)
             {
                 Windows[i].Update();
             }
+<<<<<<< HEAD
             for (int i = 0; i < Doors.Count; i++)
             {
                 Doors[i].Update();
             }
+=======
+			for (int i = 0; i < Doors.Count; i++)
+			{
+				Doors[i].Update();
+			}
+>>>>>>> master
         }
     }
 
@@ -85,10 +109,17 @@ public class Line
                 {
                     Windows[i].Update();
                 }
+<<<<<<< HEAD
                 for (int i = 0; i < Doors.Count; i++)
                 {
                     Doors[i].Update();
                 }
+=======
+				for (int i = 0; i < Doors.Count; i++)
+				{
+					Doors[i].Update();
+				}
+>>>>>>> master
             }
         }
     }
@@ -108,10 +139,17 @@ public class Line
                 {
                     Windows[i].Update();
                 }
+<<<<<<< HEAD
                 for (int i = 0; i < Doors.Count; i++)
                 {
                     Doors[i].Update();
                 }
+=======
+				for (int i = 0; i < Doors.Count; i++)
+				{
+					Doors[i].Update();
+				}
+>>>>>>> master
             }
         }
     }
@@ -226,12 +264,21 @@ public class Line
             GameObject.DestroyImmediate(lr.gameObject);
             lr = null;
         }
+<<<<<<< HEAD
         for (int i = 0; i < Windows.Count; i++) {
             GameObject.Destroy (Windows [i].Window);
         }
         for (int i = 0; i < Doors.Count; i++) {
             GameObject.Destroy (Doors [i].Door);
         }
+=======
+		for (int i = 0; i < Windows.Count; i++) {
+			GameObject.Destroy (Windows [i].Window);
+		}
+		for (int i = 0; i < Doors.Count; i++) {
+			GameObject.Destroy (Doors [i].Door);
+		}
+>>>>>>> master
     }
 
     class helper
@@ -250,7 +297,11 @@ public class Line
             return aabb;
         }
     }
+<<<<<<< HEAD
         
+=======
+		
+>>>>>>> master
 
     /// <summary>
     /// Locates the item in wall.
@@ -344,9 +395,15 @@ public class Line
             }
         }
 
+<<<<<<< HEAD
         if (xDistance + epsilon >= item.HorizontalMargin)
         {
             if (xDistance + itemWidth <= wallWidth - item.HorizontalMargin + epsilon)
+=======
+		if (xDistance + epsilon >= item.HorizontalMargin)
+        {
+			if (xDistance + itemWidth <= wallWidth - item.HorizontalMargin + epsilon)
+>>>>>>> master
             {
                 if (item.MarginTop + item.MarginDown + itemHeight < Height)
                 {
@@ -369,7 +426,11 @@ public class Line
     }
 
 
+<<<<<<< HEAD
     public const float epsilon = 0.00001f;
+=======
+	public const float epsilon = 0.00001f;
+>>>>>>> master
 
     /// <summary>
     /// Ray - ray intersection.
@@ -392,10 +453,17 @@ public class Line
         float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
 
         //is coplanar, and not parrallel
+<<<<<<< HEAD
         if (Mathf.Abs(planarFactor) < epsilon)
         {
 
             if (crossVec1and2.sqrMagnitude > epsilon)
+=======
+		if (Mathf.Abs(planarFactor) < epsilon)
+        {
+
+			if (crossVec1and2.sqrMagnitude > epsilon)
+>>>>>>> master
             {
                 float s = Vector3.Dot(crossVec3and2, crossVec1and2) / crossVec1and2.sqrMagnitude;
                 intersection = line1Point1 + (lineVec1 * s);
@@ -447,11 +515,19 @@ public class Line
         {
             if ((point - lines[i].a).sqrMagnitude < (lines[i].b - lines[i].a).sqrMagnitude)
             {
+<<<<<<< HEAD
                 if (Mathf.Abs((point - lines[i].a).magnitude + (point - lines[i].b).magnitude - (lines[i].b - lines[i].a).magnitude) <= epsilon)
                 {
                     float length = (lines[i].b - lines[i].a).magnitude;
                     float dot = Vector3.Dot(point - lines[i].a, (lines[i].b - lines[i].a) / length);
                     if (dot > epsilon && length - dot > epsilon)
+=======
+				if (Mathf.Abs((point - lines[i].a).magnitude + (point - lines[i].b).magnitude - (lines[i].b - lines[i].a).magnitude) <= epsilon)
+                {
+                    float length = (lines[i].b - lines[i].a).magnitude;
+                    float dot = Vector3.Dot(point - lines[i].a, (lines[i].b - lines[i].a) / length);
+					if (dot > epsilon && length - dot > epsilon)
+>>>>>>> master
                     {
                         int newid = output[i].Vertices.Count;
                         output[i].Vertices.Add(point);
@@ -515,7 +591,11 @@ public class Line
 
     static bool isPointOverLine(Vector3 a, Vector3 b, Vector3 p)
     {
+<<<<<<< HEAD
         return Mathf.Abs((a - b).magnitude - ((a - p).magnitude + (b - p).magnitude)) <= epsilon;
+=======
+		return Mathf.Abs((a - b).magnitude - ((a - p).magnitude + (b - p).magnitude)) <= epsilon;
+>>>>>>> master
     }
 
     static void WeldInterstion(List<Vector3> segmentsWithContour, int l11, int l12, int l21, int l22)
@@ -1120,11 +1200,19 @@ public class Line
                 det += (directedPaths[i][j + 1] - Vector3.right * 1000.0f).sqrMagnitude;
                 if (det < dst)
                 {
+<<<<<<< HEAD
                     if (Mathf.Abs(Vector3.Dot(Vector3.Normalize(directedPaths[i][j] - directedPaths[i][j + 1]), Vector3.forward)) > epsilon)
                     {
                         dst = det;
                         minSeg = j;
                     }
+=======
+					if (Mathf.Abs(Vector3.Dot(Vector3.Normalize(directedPaths[i][j] - directedPaths[i][j + 1]), Vector3.forward)) > epsilon)
+					{
+	                    dst = det;
+	                    minSeg = j;
+					}
+>>>>>>> master
                 }
             }
 
@@ -1167,6 +1255,10 @@ public class Line
 
 
 
+			Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), 0, Random.Range(10000.0f, 50000.0f));
+
+
+
             int intersectionCount = 0;
             for (int j = 0; j < directedPaths.Count; j++)
             {
@@ -1176,6 +1268,7 @@ public class Line
                     {
 
                         Vector3 tmp;
+<<<<<<< HEAD
                         if (RayRayIntersection(out tmp, directedPaths[j][k], directedPaths[j][k + 1], randomVertex, randomOutterPoint))
                         {
                             if ((tmp - randomOutterPoint).magnitude <= (randomVertex - randomOutterPoint).magnitude)
@@ -1188,6 +1281,20 @@ public class Line
                                             intersectionCount++;
                                         }
                                     }
+=======
+						if (RayRayIntersection(out tmp, directedPaths[j][k], directedPaths[j][k + 1], randomVertex, randomOutterPoint))
+                        {
+							if ((tmp - randomOutterPoint).magnitude <= (randomVertex - randomOutterPoint).magnitude)
+                            {
+                                if ((tmp - directedPaths[j][k]).magnitude <= (directedPaths[j][k + 1] - directedPaths[j][k]).magnitude)
+                                {
+									if ((tmp - directedPaths [j] [k]).sqrMagnitude > epsilon && (tmp - directedPaths [j] [k + 1]).sqrMagnitude > epsilon)
+									{
+										if (Vector3.Dot (tmp - directedPaths [j] [k], directedPaths [j] [k + 1] - directedPaths [j] [k]) >= 0) {
+											intersectionCount++;
+										}
+									}
+>>>>>>> master
                                 }
                             }
                         }
@@ -1201,6 +1308,7 @@ public class Line
             {
                 directedPaths[i].Reverse();
 
+<<<<<<< HEAD
                 {
                     List<Line> toCap = new List<Line> ();
                     List<Vector3> tmpverts = new List<Vector3> ();
@@ -1237,6 +1345,44 @@ public class Line
                 for (int j = 0; j < directedPaths[i].Count; j += 2)
                 {
                     if (Mathf.Abs((directedPaths[i][j] - directedPaths[i][j + 1]).sqrMagnitude - thicknessSqrd) <= epsilon)
+=======
+				{
+					List<Line> toCap = new List<Line> ();
+					List<Vector3> tmpverts = new List<Vector3> ();
+					tmpverts.AddRange (directedPaths [i]);
+					for (int j = 0; j < directedPaths [i].Count; j += 2) {
+						Line ll = new Line (tmpverts, j, j + 1, 0, null, null, null, null);
+						ll.Destroy ();
+						toCap.Add (ll);
+					}
+
+					Line.WeldVertices (toCap);
+					List<int> triangles;
+					List<Vector3> verts;
+					List<Vector2> uvs;
+					List<Vector3> normals;
+					try {
+						Line.FillCap (toCap, out triangles, out verts, out uvs, out normals);
+						if (triangles.Count % 3 == 0){
+							Mesh mm = new Mesh () {
+								vertices = verts.ToArray (),
+								uv = uvs.ToArray (),
+								normals = normals.ToArray (),
+								triangles = triangles.ToArray ()
+							};
+							floors.Add (mm);
+						}
+					} catch {
+						Debug.Log ("floor !");
+					}
+
+
+				}
+
+                for (int j = 0; j < directedPaths[i].Count; j += 2)
+                {
+					if (Mathf.Abs((directedPaths[i][j] - directedPaths[i][j + 1]).sqrMagnitude - thicknessSqrd) <= epsilon)
+>>>>>>> master
                     {
                         Line l = null;
                         float dst = float.MaxValue;
@@ -1316,7 +1462,11 @@ public class Line
                 for (int j = 0; j < directedPaths[i].Count; j += 2)
                 {
 
+<<<<<<< HEAD
                     if (Mathf.Abs((directedPaths[i][j] - directedPaths[i][j + 1]).sqrMagnitude - thicknessSqrd) <= epsilon)
+=======
+					if (Mathf.Abs((directedPaths[i][j] - directedPaths[i][j + 1]).sqrMagnitude - thicknessSqrd) <= epsilon)
+>>>>>>> master
                     {
                         Line l = null;
                         float dst = float.MaxValue;
@@ -1401,6 +1551,7 @@ public class Line
 
 
     public static void OptimizePath(ref List<Line> lines)
+<<<<<<< HEAD
     {
         // remove 0 length lines
         for (int i = lines.Count - 1; i >= 0; i--) {
@@ -1575,6 +1726,197 @@ public class Line
     }
 
     public static void FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
+=======
+	{
+		// remove 0 length lines
+		for (int i = lines.Count - 1; i >= 0; i--) {
+			if ((lines [i].a - lines [i].b).sqrMagnitude <= epsilon) {
+				lines [i].Destroy ();
+				lines.RemoveAt (i);
+			}
+		}
+
+		if (lines.Count == 0)
+			return;
+
+		// find paths
+		List<List<Line>> topology = new List<List<Line>> ();
+		topology.Add (new List<Line> ());
+		topology [topology.Count - 1].Add (lines [0]);
+		Vector3 lastPoint = lines [0].b;
+		lines.RemoveAt (0);
+
+		while (lines.Count > 0) {
+			bool flag = true;
+			for (int i = 0; i < lines.Count; i++) {
+				if (lastPoint == lines [i].a) {
+					topology [topology.Count - 1].Add (lines [i]);
+					lastPoint = lines [i].b;
+					lines.RemoveAt (i);
+					flag = false;
+					break;
+				} else if (lastPoint == lines [i].b) {
+					topology [topology.Count - 1].Add (lines [i]);
+					lastPoint = lines [i].a;
+					lines.RemoveAt (i);
+					flag = false;
+					break;
+				}
+			}
+
+			if (flag) {
+				// to avoid infinite loop
+				// make new directed path
+				topology.Add (new List<Line> ());
+				topology [topology.Count - 1].Add (lines [0]);
+				lastPoint = lines [0].b;
+				lines.RemoveAt (0);
+			}
+		}
+
+		// for each segment x, y if (x, y are in the same direction and connected) connect (x,y)
+		for (int i = 0; i < topology.Count; i++) {
+			for (int j = topology [i].Count - 1; j >= 1; j--) {
+				
+				if (topology [i] [j - 1].LineType == topology [i] [j].LineType) {
+					Vector3 dir1 = topology [i] [j - 1].b - topology [i] [j - 1].a;
+					Vector3 dir2 = topology [i] [j].b - topology [i] [j].a;
+					dir1.Normalize ();
+					dir2.Normalize ();
+					//same direction
+					if ((dir1 - dir2).sqrMagnitude <= epsilon) {
+						//ab ab
+						//ba ba
+						if ((topology [i] [j].b - topology [i] [j - 1].a).sqrMagnitude <= epsilon) {
+							//topology[i][j].b must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].bID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].bID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2) {
+								topology [i] [j - 1].a = topology [i] [j].a;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
+						} else {
+							//topology[i][j].a must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].aID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].aID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2) {
+								topology [i] [j - 1].b = topology [i] [j].b;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
+						}
+                        
+					} else if ((dir1 - -dir2).sqrMagnitude <= epsilon) {
+						//ab ba
+						//ba ab
+						if ((topology [i] [j].b - topology [i] [j - 1].b).sqrMagnitude <= epsilon) {
+							//topology[i][j].b must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].bID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].bID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2) {
+								topology [i] [j - 1].b = topology [i] [j].a;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
+						} else {
+							//topology[i][j].a must be shared with 2 only
+							int flag = 0;
+							for (int k = 0; k < topology.Count; k++) {
+								for (int kk = 0; kk < topology [k].Count; kk++) {
+									if (topology [k] [kk].aID == topology [i] [j].aID) {
+										flag++;
+									}
+									if (topology [k] [kk].bID == topology [i] [j].aID) {
+										flag++;
+									}
+								}
+							}
+							if (flag == 2) {
+								topology [i] [j - 1].a = topology [i] [j].b;
+								topology [i] [j].Destroy ();
+								topology [i].RemoveAt (j);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+
+		// for each segment in path try to split if a vertex is between segment vertices
+		for (int i = 0; i < topology.Count; i++) {
+			HashSet<Vector3> vertices = new HashSet<Vector3> ();
+			for (int j = 0; j < topology [i].Count; j++) {
+				vertices.Add (topology [i] [j].a);
+				vertices.Add (topology [i] [j].b);
+			}
+
+			for (int j = 0; j < topology.Count; j++) {
+
+				if (i == j)
+					continue;
+
+				foreach (Vector3 v in (IEnumerable)vertices) {
+					List<Line> nlines = Split (topology [j], v);
+					topology [j] = nlines;
+				}
+
+
+			}
+		}
+
+
+
+		for (int i = 0; i < topology.Count; i++) {
+			lines.AddRange (topology [i]);
+		}
+	}
+
+	public static void FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
+	{
+		int tries = 5;
+		while (tries > 0) {
+			try
+			{
+				_FillCap(_lines, out triangles, out verts, out uvs, out normals);
+				return;
+			}
+			catch {
+			}
+			tries--;
+		}
+		throw new UnityException ("Unable to fill cap");
+	}
+    private static void _FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
+>>>>>>> master
     {
         int tries = 5;
         while (tries > 0) {
@@ -1614,7 +1956,11 @@ public class Line
         int eeee = 0;
         while (list.Count > 2)
         {
+<<<<<<< HEAD
             if (eeee > lines.Count * 5)
+=======
+			if (eeee > lines.Count * 5)
+>>>>>>> master
             {
 
                 throw new UnityException("!!");
@@ -1631,10 +1977,17 @@ public class Line
             {
                 if (i != e1)
                 {
+<<<<<<< HEAD
                     if (Mathf.Abs(Mathf.Abs(Vector3.Dot((list[i].a - list[i].b).normalized, (list[e1].a - list[e1].b).normalized)) - 1.0f) <= epsilon)
                         continue;
 
                     if ((list[i].a - list[e1].a).sqrMagnitude < epsilon)
+=======
+					if (Mathf.Abs(Mathf.Abs(Vector3.Dot((list[i].a - list[i].b).normalized, (list[e1].a - list[e1].b).normalized)) - 1.0f) <= epsilon)
+                        continue;
+
+					if ((list[i].a - list[e1].a).sqrMagnitude < epsilon)
+>>>>>>> master
                     {
                         e2[e2index] = i;
                         middlePoint[e2index] = (list[i].b + list[e1].b) * 0.5f;
@@ -1646,7 +1999,11 @@ public class Line
                         if (e2index == 2)
                             break;
                     }
+<<<<<<< HEAD
                     if ((list[i].a - list[e1].b).sqrMagnitude < epsilon)
+=======
+					if ((list[i].a - list[e1].b).sqrMagnitude < epsilon)
+>>>>>>> master
                     {
                         e2[e2index] = i;
                         middlePoint[e2index] = (list[i].b + list[e1].a) * 0.5f;
@@ -1658,7 +2015,11 @@ public class Line
                         if (e2index == 2)
                             break;
                     }
+<<<<<<< HEAD
                     if ((list[i].b - list[e1].a).sqrMagnitude < epsilon)
+=======
+					if ((list[i].b - list[e1].a).sqrMagnitude < epsilon)
+>>>>>>> master
                     {
                         e2[e2index] = i;
                         middlePoint[e2index] = (list[i].a + list[e1].b) * 0.5f;
@@ -1670,7 +2031,11 @@ public class Line
                         if (e2index == 2)
                             break;
                     }
+<<<<<<< HEAD
                     if ((list[i].b - list[e1].b).sqrMagnitude < epsilon)
+=======
+					if ((list[i].b - list[e1].b).sqrMagnitude < epsilon)
+>>>>>>> master
                     {
                         e2[e2index] = i;
                         middlePoint[e2index] = (list[i].a + list[e1].a) * 0.5f;
@@ -1687,11 +2052,19 @@ public class Line
 
             if (e2[0] == -1)
                 continue;
+<<<<<<< HEAD
             
 
             int[] intersectionCount = { 0, 0 };
             HashSet<int> e2indices = new HashSet<int>();
             Vector3 randomOutterVector = new Vector3 (Random.Range(5000.0f, 10000.0f), 0, Random.Range(5000.0f, 10000.0f));
+=======
+			
+
+            int[] intersectionCount = { 0, 0 };
+            HashSet<int> e2indices = new HashSet<int>();
+			Vector3 randomOutterVector = new Vector3 (Random.Range(5000.0f, 10000.0f), 0, Random.Range(5000.0f, 10000.0f));
+>>>>>>> master
             for (int i = 0; i < e2index; i++)
             {
                 bool flag = true;
@@ -1702,6 +2075,7 @@ public class Line
                     Vector3 tmp;
                     if (RayRayIntersection(out tmp, x1[i], x2[i], lines[k].a, lines[k].b))
                     {
+<<<<<<< HEAD
                         float dst = (tmp - x1 [i]).sqrMagnitude;
                         if (dst < (x2[i] - x1[i]).sqrMagnitude && dst > epsilon)
                         {
@@ -1728,10 +2102,39 @@ public class Line
                                         flag = false;
                                         break;
                                     }
+=======
+						float dst = (tmp - x1 [i]).sqrMagnitude;
+						if (dst < (x2[i] - x1[i]).sqrMagnitude && dst > epsilon)
+                        {
+							if (Vector3.Dot(tmp - x1[i], (x2[i] - x1[i]).normalized) >= 0)
+                            {
+								if (Mathf.Abs((tmp - lines[k].a).magnitude + (tmp - lines[k].b).magnitude - (lines[k].a - lines[k].b).magnitude) <= epsilon)
+                                {
+									if ((tmp - lines [k].a).sqrMagnitude > epsilon && (tmp - lines [k].b).sqrMagnitude > epsilon)
+									{
+//										if (eeee > 1000 && eeee < 1100) {
+//											{
+//												string sssss = ("e1 = " + e1 + "e2[] = " + e2 [0] + "" + e2 [1] + "\n");
+//
+//												for (int kkk = 0; kkk < lines.Count; ++kkk) {
+//													sssss += (lines [kkk].a.x + "\t" + lines [kkk].a.z + "\t" + (kkk * 2) + "\n");
+//													sssss += (lines [kkk].b.x + "\t" + lines [kkk].b.z + "\t" + (kkk * 2 + 1) + "\n");
+//												}
+//												sssss += "REFUSED " + x1 [i] + " " + x2 [i] + "\n";
+//												sssss += ("____\n");
+//												Debug.Log (msgCount + "\n" + sssss);
+//												msgCount++;
+//											}
+//										}
+										flag = false;
+										break;
+									}
+>>>>>>> master
                                 }
                             }
                         }
                     }
+<<<<<<< HEAD
                     if (RayRayIntersection(out tmp, lines[k].a, lines[k].b, middlePoint[i], randomOutterVector))
                     {
                         if ((tmp - randomOutterVector).magnitude <= (middlePoint[i] - randomOutterVector).magnitude)
@@ -1743,6 +2146,19 @@ public class Line
                                         intersectionCount [i]++;
                                     }
                                 }
+=======
+					if (RayRayIntersection(out tmp, lines[k].a, lines[k].b, middlePoint[i], randomOutterVector))
+                    {
+						if ((tmp - randomOutterVector).magnitude <= (middlePoint[i] - randomOutterVector).magnitude)
+                        {
+							if (Mathf.Abs((tmp - lines[k].a).magnitude + (tmp - lines[k].b).magnitude - (lines[k].b - lines[k].a).magnitude) <= epsilon)
+                            {
+								if ((tmp - lines [k].a).sqrMagnitude > epsilon && (tmp - lines [k].b).sqrMagnitude > epsilon) {
+									if (Vector3.Dot (tmp - lines [k].a, lines [k].b - lines [k].a) >= 0) {
+										intersectionCount [i]++;
+									}
+								}
+>>>>>>> master
                             }
                         }
                     }
@@ -1765,11 +2181,19 @@ public class Line
                 HashSet<int> abc = new HashSet<int>() { ix1[0], ix2[0], list[e1].aID, list[e1].bID };
 //                if (abc.Count == 3)
                 triangles.AddRange(abc);
+<<<<<<< HEAD
                 if (abc.Count != 3) {
 
 
                     Debug.Log ("abc != 3");
                 }
+=======
+				if (abc.Count != 3) {
+
+
+					Debug.Log ("abc != 3");
+				}
+>>>>>>> master
 
 
 
@@ -1792,11 +2216,19 @@ public class Line
                 HashSet<int> abc = new HashSet<int>() { ix1[1], ix2[1], list[e1].aID, list[e1].bID };
 //                if (abc.Count == 3)
                 triangles.AddRange(abc);
+<<<<<<< HEAD
                 if (abc.Count != 3) {
 
 
                     Debug.Log ("abc != 3");
                 }
+=======
+				if (abc.Count != 3) {
+
+
+					Debug.Log ("abc != 3");
+				}
+>>>>>>> master
 
 
 
@@ -1818,10 +2250,21 @@ public class Line
                 //              triangles.Add (list [1].aID == list [0].aID ? list [1].bID : list [1].aID);
 
                 HashSet<int> abc = new HashSet<int>() { list[0].aID, list[0].bID, list[1].aID, list[1].bID };
+<<<<<<< HEAD
 //              if (abc.Count == 3)
                 triangles.AddRange(abc);
                 if (abc.Count != 3) {
+=======
+//				if (abc.Count == 3)
+                triangles.AddRange(abc);
+				if (abc.Count != 3) {
 
+>>>>>>> master
+
+					Debug.Log ("abc != 3");
+
+				}
+	
 
                     Debug.Log ("abc != 3");
 
@@ -1853,16 +2296,26 @@ public class Line
             }
 
 
+<<<<<<< HEAD
 //          while (triangles.Count % 3 != 0)
 //              triangles.RemoveAt (triangles.Count - 1);
             
+=======
+//			while (triangles.Count % 3 != 0)
+//				triangles.RemoveAt (triangles.Count - 1);
+			
+>>>>>>> master
 
             for (int i = 0; i < triangles.Count; i += 3)
             {
                 if (i + 2 >= triangles.Count)
                 {
                     i--;
+<<<<<<< HEAD
                     break;
+=======
+					break;
+>>>>>>> master
                 }
                 Plane p = new Plane(verts[triangles[i]], verts[triangles[i + 1]], verts[triangles[i + 2]]);
                 if (Vector3.Dot(p.normal, Vector3.up) < 0)
