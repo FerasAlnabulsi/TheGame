@@ -108,8 +108,8 @@ public class Roof : MonoBehaviour {
 				int minSeg = -1;
 				float dst = float.MaxValue;
 				for (int j = 0; j < directedPaths [i].Count; j += 2) {
-					float det = (directedPaths [i] [j] - Vector3.right * 1000000).sqrMagnitude;
-					det += (directedPaths [i] [j + 1] - Vector3.right * 1000000).sqrMagnitude;
+					float det = (directedPaths [i] [j] - (Vector3.right * 10000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
+					det += (directedPaths [i] [j + 1] - (Vector3.right * 10000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
 					if (det < dst) {
 						dst = det;
 						minSeg = j;
@@ -274,7 +274,17 @@ public class Roof : MonoBehaviour {
 					normals.AddRange (normals2);
 
 					for (int i = 0; i < lastQuad.Count; i++) {
-						triangles.Add (verts.IndexOf (lastQuad [i]));
+						int id = verts.FindIndex (delegate(Vector3 obj) {
+							return (obj - lastQuad[i]).sqrMagnitude <= 0.0001f;
+						});
+							
+//						if (id == -1)
+//						{
+//							id = verts.Count;
+//							verts.Add (lastQuad[i]);
+//
+//						}
+						triangles.Add (id);
 					}
 
 
@@ -387,8 +397,8 @@ public class Roof : MonoBehaviour {
 				int minSeg = -1;
 				float dst = float.MaxValue;
 				for (int j = 0; j < directedPaths [i].Count; j += 2) {
-					float det = (directedPaths [i] [j] - Vector3.right * 1000000).sqrMagnitude;
-					det += (directedPaths [i] [j + 1] - Vector3.right * 1000000).sqrMagnitude;
+					float det = (directedPaths [i] [j] - (Vector3.right * 10000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
+					det += (directedPaths [i] [j + 1] - (Vector3.right * 10000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
 					if (det < dst) {
 						dst = det;
 						minSeg = j;

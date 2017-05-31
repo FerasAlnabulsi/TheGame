@@ -37,7 +37,7 @@ public class UpperWallFace : MonoBehaviour
 			return;
 		}
 
-		Vector3 infiniteRandomPoint = new Vector3 (Random.value * 10000.0f + 1000.0f, 0.0f, Random.value * 1000.0f + 10000.0f);
+		Vector3 infiniteRandomPoint = new Vector3 (Random.value * 10000.0f + 1000.0f, _segments[0].a.y, Random.value * 1000.0f + 10000.0f);
 
 		List<Line> segments = new List<Line> ();
 
@@ -225,8 +225,8 @@ public class UpperWallFace : MonoBehaviour
 			int minSeg = -1;
 			float dst = float.MaxValue;
 			for (int j = 0; j < directedPaths[i].Count; j += 2) {
-				float det = (directedPaths[i] [j] - Vector3.right * 1000.0f).sqrMagnitude;
-				det += (directedPaths[i] [j + 1] - Vector3.right * 1000.0f).sqrMagnitude;
+				float det = (directedPaths[i] [j] - (Vector3.right * 1000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
+				det += (directedPaths[i] [j + 1] - (Vector3.right * 1000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
 				if (det < dst) {
 					dst = det;
 					minSeg = j;
@@ -259,7 +259,7 @@ public class UpperWallFace : MonoBehaviour
 			int rand = Random.Range(0, directedPaths[i].Count / 2) * 2;
 			Vector3 randomVertex = Vector3.Lerp (directedPaths [i] [rand], directedPaths [i] [rand + 1], Random.Range (1, 99) / 100.0f);
 
-			Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), 0, Random.Range(10000.0f, 50000.0f));
+			Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), _segments[0].a.y, Random.Range(10000.0f, 50000.0f));
 
 			int intersectionCount = 0;
 			for (int j = 0; j < directedPaths.Count; j++) 
@@ -589,7 +589,7 @@ public class UpperWallFace : MonoBehaviour
 					CombineInstance ci = new CombineInstance ();
 					ci.mesh = new Mesh ();
 					for (int j = 0; j < verts.Count; j++) {
-						verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
+						verts [j] = new Vector3 (verts [j].x, verts[j].y + pathId [i] [0].Height, verts [j].z);
 					}
 					ci.mesh.vertices = verts.ToArray ();
 					ci.mesh.uv = uvs.ToArray ();
@@ -652,7 +652,7 @@ public class UpperWallFace : MonoBehaviour
 					CombineInstance ci = new CombineInstance ();
 					ci.mesh = new Mesh ();
 					for (int j = 0; j < verts.Count; j++) {
-						verts [j] = new Vector3 (verts [j].x, pathId [i] [0].Height, verts [j].z);
+						verts [j] = new Vector3 (verts [j].x, verts[j].y + pathId [i] [0].Height, verts [j].z);
 					}
 
 
