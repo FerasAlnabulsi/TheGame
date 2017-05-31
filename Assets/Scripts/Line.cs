@@ -163,7 +163,7 @@ public class Line
             lr = new GameObject("line").AddComponent<LineRenderer>();
             lr.gameObject.AddComponent<MeshCollider>();
             this.LineMaterial = mat;
-            lr.numPositions = 2;
+            lr.positionCount = 2;
             lr.startWidth = 0.05f;
             lr.endWidth = 0.05f;
             //lr.SetVertexCount(2);
@@ -186,11 +186,14 @@ public class Line
     {
         get
         {
+			if (lr == null)
+				return false;
             return lr.enabled;
         }
         set
         {
-            lr.enabled = value;
+			if (lr != null)
+				lr.enabled = value;
         }
     }
 
@@ -375,7 +378,7 @@ public class Line
 
 
 
-	public const float epsilon = 0.00001f;
+	public const float epsilon = 0.0001f;
 
     /// <summary>
     /// Ray - ray intersection.
@@ -388,7 +391,6 @@ public class Line
     /// <param name="line2Point2">Line2 point2.</param>
     public static bool RayRayIntersection(out Vector3 intersection, Vector3 line1Point1, Vector3 line1Point2, Vector3 line2Point1, Vector3 line2Point2)
     {
-
         Vector3 lineVec3 = line2Point1 - line1Point1;
         Vector3 lineVec1 = line1Point1 - line1Point2;
         Vector3 lineVec2 = line2Point1 - line2Point2;
@@ -488,8 +490,12 @@ public class Line
 
         for (int i = 0; i < lines.Count; i++)
         {
-            int aid = verts.IndexOf(lines[i].a);
-            int bid = verts.IndexOf(lines[i].b);
+			int aid = verts.FindIndex (delegate(Vector3 obj) {
+				return (obj - lines [i].a).sqrMagnitude <= 0.0001f;
+			});
+			int bid = verts.FindIndex (delegate(Vector3 obj) {
+				return (obj - lines [i].b).sqrMagnitude <= 0.0001f;
+			});
             lines[i].Vertices = verts;
             lines[i].aID = aid;
             lines[i].bID = bid;
@@ -926,14 +932,19 @@ public class Line
                 if (windows[0].Position.x != 0)
                 {
 
-                    int id1 = vbuffer.IndexOf(_segments[i].a);
+					int id1 = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - _segments [i].a).sqrMagnitude <= 0.0001f;
+					});
+
                     if (id1 == -1)
                     {
                         id1 = vbuffer.Count;
                         vbuffer.Add(_segments[i].a);
                     }
                     Vector3 v2 = _segments[i].a + (_segments[i].b - _segments[i].a).normalized * windows[0].Position.x;
-                    int id2 = vbuffer.IndexOf(v2);
+					int id2 = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - v2).sqrMagnitude <= 0.0001f;
+					});
                     if (id2 == -1)
                     {
                         id2 = vbuffer.Count;
@@ -952,13 +963,17 @@ public class Line
                     Vector3 start = _segments[i].a + (_segments[i].b - _segments[i].a).normalized * windows[j].Position.x;
                     Vector3 end = _segments[i].a + (_segments[i].b - _segments[i].a).normalized * (windows[j].Position.x + windows[j].WindowWidth);
 
-                    int istart = vbuffer.IndexOf(start);
+					int istart = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - start).sqrMagnitude <= 0.0001f;
+					});
                     if (istart == -1)
                     {
                         istart = vbuffer.Count;
                         vbuffer.Add(start);
                     }
-                    int iend = vbuffer.IndexOf(end);
+					int iend = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - end).sqrMagnitude <= 0.0001f;
+					});
                     if (iend == -1)
                     {
                         iend = vbuffer.Count;
@@ -975,7 +990,9 @@ public class Line
                     segments.Add(windowSeg);
 
                     Vector3 nextStart = _segments[i].a + (_segments[i].b - _segments[i].a).normalized * windows[j + 1].Position.x;
-                    int inextStart = vbuffer.IndexOf(nextStart);
+					int inextStart = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - nextStart).sqrMagnitude <= 0.0001f;
+					});
                     if (inextStart == -1)
                     {
                         inextStart = vbuffer.Count;
@@ -991,13 +1008,17 @@ public class Line
                 {
                     Vector3 start = _segments[i].a + (_segments[i].b - _segments[i].a).normalized * windows[windows.Count - 1].Position.x;
                     Vector3 end = _segments[i].a + (_segments[i].b - _segments[i].a).normalized * (windows[windows.Count - 1].Position.x + windows[windows.Count - 1].WindowWidth);
-                    int istart = vbuffer.IndexOf(start);
+					int istart = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - start).sqrMagnitude <= 0.0001f;
+					});
                     if (istart == -1)
                     {
                         istart = vbuffer.Count;
                         vbuffer.Add(start);
                     }
-                    int iend = vbuffer.IndexOf(end);
+					int iend = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - end).sqrMagnitude <= 0.0001f;
+					});
                     if (iend == -1)
                     {
                         iend = vbuffer.Count;
@@ -1013,7 +1034,9 @@ public class Line
                     windowSeg.ParentLine = _segments[i];
                     segments.Add(windowSeg);
 
-                    int id2 = vbuffer.IndexOf(_segments[i].b);
+					int id2 = vbuffer.FindIndex (delegate(Vector3 obj) {
+						return (obj - _segments [i].b).sqrMagnitude <= 0.0001f;
+					});
                     if (id2 == -1)
                     {
                         id2 = vbuffer.Count;
@@ -1123,8 +1146,8 @@ public class Line
             float dst = float.MaxValue;
             for (int j = 0; j < directedPaths[i].Count; j += 2)
             {
-                float det = (directedPaths[i][j] - Vector3.right * 1000.0f).sqrMagnitude;
-                det += (directedPaths[i][j + 1] - Vector3.right * 1000.0f).sqrMagnitude;
+				float det = (directedPaths[i][j] - (Vector3.right * 1000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
+				det += (directedPaths[i][j + 1] - (Vector3.right * 1000.0f + Vector3.up * directedPaths[0][0].y)).sqrMagnitude;
                 if (det < dst)
                 {
 					if (Mathf.Abs(Vector3.Dot(Vector3.Normalize(directedPaths[i][j] - directedPaths[i][j + 1]), Vector3.forward)) > epsilon)
@@ -1165,45 +1188,52 @@ public class Line
         for (int i = 0; i < directedPaths.Count; i++)
         {
             // bug .. [\] will not work correctly
-            int rand = Random.Range(0, directedPaths[i].Count / 2) * 2;
-            Vector3 randomVertex = Vector3.Lerp(directedPaths[i][rand], directedPaths[i][rand + 1], Random.Range(1, 99) / 100.0f);
+           
             //if (i == 1)
             //  randomVertex = new Vector3 (2.9f, 0, 2.4f);
 
-            Vector3 randomOutterPoint = new Vector3 (Random.Range(10000.0f, 50000.0f), 0, Random.Range(10000.0f, 50000.0f));
 
-            int intersectionCount = 0;
-            for (int j = 0; j < directedPaths.Count; j++)
-            {
-                if (i != j)
-                {
-                    for (int k = 0; k < directedPaths[j].Count; k += 2)
-                    {
 
-                        Vector3 tmp;
+			int[] intersectionCount = new int[30];
 
-						if (RayRayIntersection(out tmp, directedPaths[j][k], directedPaths[j][k + 1], randomVertex, randomOutterPoint))
-                        {
-							if ((tmp - randomOutterPoint).magnitude <= (randomVertex - randomOutterPoint).magnitude)
-                            {
-                                if ((tmp - directedPaths[j][k]).magnitude <= (directedPaths[j][k + 1] - directedPaths[j][k]).magnitude)
-                                {
-									if ((tmp - directedPaths [j] [k]).sqrMagnitude > epsilon && (tmp - directedPaths [j] [k + 1]).sqrMagnitude > epsilon)
-									{
-										if (Vector3.Dot (tmp - directedPaths [j] [k], directedPaths [j] [k + 1] - directedPaths [j] [k]) >= 0) {
-											intersectionCount++;
+
+			for (int test = 0; test < intersectionCount.Length; test++) {
+				intersectionCount [test] = 0;
+				Vector3 randomOutterPoint = new Vector3 (Random.Range (10000.0f, 50000.0f), directedPaths [0] [0].y, Random.Range (10000.0f, 50000.0f));
+				int rand = Random.Range(0, directedPaths[i].Count / 2) * 2;
+				Vector3 randomVertex = Vector3.Lerp(directedPaths[i][rand], directedPaths[i][rand + 1], Random.Range(5, 95) / 100.0f);
+
+
+				for (int j = 0; j < directedPaths.Count; j++) {
+					if (i != j) {
+						for (int k = 0; k < directedPaths [j].Count; k += 2) {
+
+							Vector3 tmp;
+
+							if (RayRayIntersection (out tmp, directedPaths [j] [k], directedPaths [j] [k + 1], randomVertex, randomOutterPoint)) {
+								if ((tmp - randomOutterPoint).magnitude <= (randomVertex - randomOutterPoint).magnitude) {
+									if ((tmp - directedPaths [j] [k]).magnitude <= (directedPaths [j] [k + 1] - directedPaths [j] [k]).magnitude) {
+										if ((tmp - directedPaths [j] [k]).sqrMagnitude > epsilon && (tmp - directedPaths [j] [k + 1]).sqrMagnitude > epsilon) {
+											if (Vector3.Dot (tmp - directedPaths [j] [k], directedPaths [j] [k + 1] - directedPaths [j] [k]) >= 0) {
+												intersectionCount[test]++;
+											}
 										}
 									}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+								}
+							}
+						}
+					}
+				}
+			}
+
+			int success = 0;
+			for (int test = 0; test < intersectionCount.Length; test++) {
+				success += (intersectionCount [test] % 2 == 1 ? 1 : 0);
+			}
 
 
 
-            if (intersectionCount % 2 == 1)
+			if (success >= intersectionCount.Length / 3)
             {
                 directedPaths[i].Reverse();
 
@@ -1582,16 +1612,36 @@ public class Line
 
 	public static void FillCap(List<Line> _lines, out List<int> triangles, out List<Vector3> verts, out List<Vector2> uvs, out List<Vector3> normals)
 	{
+		float yval = 0;
+		if (_lines.Count != 0)
+			yval = _lines [0].a.y;
+		for (int i = 0; i < _lines[0].Vertices.Count; i++) {
+			Vector3 tmp = _lines [0].Vertices [i];
+			tmp.y = 0.0f;
+			_lines [0].Vertices [i] = tmp;
+		}
+
 		int tries = 5;
 		while (tries > 0) {
 			try
 			{
 				_FillCap(_lines, out triangles, out verts, out uvs, out normals);
+				for (int i = 0; i < _lines[0].Vertices.Count; i++) {
+					_lines [0].Vertices [i] += yval * Vector3.up;
+				}
+				for (int i = 0; i < verts.Count; i++) {
+					Vector3 tmp = verts[i];
+					tmp.y = yval;
+					verts [i] = tmp;
+				}
 				return;
 			}
 			catch {
 			}
 			tries--;
+		}
+		for (int i = 0; i < _lines[0].Vertices.Count; i++) {
+			_lines [0].Vertices [i] += yval * Vector3.up;
 		}
 		throw new UnityException ("Unable to fill cap");
 	}
@@ -1697,7 +1747,7 @@ public class Line
 
 			int[] intersectionCount = { 0, 0 };
 			HashSet<int> e2indices = new HashSet<int>();
-			Vector3 randomOutterVector = new Vector3 (Random.Range(5000.0f, 10000.0f), 0, Random.Range(5000.0f, 10000.0f));
+			Vector3 randomOutterVector = new Vector3 (Random.Range(5000.0f, 10000.0f), lines[0].a.y, Random.Range(5000.0f, 10000.0f));
 			for (int i = 0; i < e2index; i++)
 			{
 				bool flag = true;
@@ -1738,12 +1788,19 @@ public class Line
 							}
 						}
 					}
+					float tmpp1, tmpp2;
 					if (RayRayIntersection(out tmp, lines[k].a, lines[k].b, middlePoint[i], randomOutterVector))
 					{
+						tmpp1 = (tmp - randomOutterVector).magnitude;
+						tmpp2 = (middlePoint [i] - randomOutterVector).magnitude;
 						if ((tmp - randomOutterVector).magnitude <= (middlePoint[i] - randomOutterVector).magnitude)
 						{
+							tmpp1 = Mathf.Abs ((tmp - lines [k].a).magnitude + (tmp - lines [k].b).magnitude - (lines [k].b - lines [k].a).magnitude);
+
 							if (Mathf.Abs((tmp - lines[k].a).magnitude + (tmp - lines[k].b).magnitude - (lines[k].b - lines[k].a).magnitude) <= epsilon)
 							{
+								tmpp1 = (tmp - lines [k].a).sqrMagnitude;
+								tmpp2 = (tmp - lines [k].b).sqrMagnitude;
 								if ((tmp - lines [k].a).sqrMagnitude > epsilon && (tmp - lines [k].b).sqrMagnitude > epsilon) {
 									if (Vector3.Dot (tmp - lines [k].a, lines [k].b - lines [k].a) >= 0) {
 										intersectionCount [i]++;

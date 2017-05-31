@@ -1,23 +1,81 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 
 public delegate void MovingHandler(GameObject sender, Vector3 oldPosition, Vector3 newPosition);
 
+public enum DraggablePlane
+{
+	XY,
+	YZ,
+	XZ
+};
+
 public class Draggable : MonoBehaviour {
 
-	public bool Enabled;
+	DraggablePlane draggingPlane = DraggablePlane.XZ;
+	public DraggablePlane DraggingPlane
+	{
+		get {
+			return draggingPlane;
+		}
+		set {
+			if (draggingPlane != value) {
+				Vector3[] verts = new Vector3[((MeshCollider)_collider).sharedMesh.vertices.Length];
+				((MeshCollider)_collider).sharedMesh.vertices.CopyTo (verts, 0);
 
-	public bool XEnabled;
+				switch (draggingPlane) {
+				case DraggablePlane.XY:
+					for (int i = 0; i < verts.Length; i++) {
+						float tmp = verts [i].z;
+						verts [i].z = verts [i].y;
+						verts [i].y = tmp;
+					}
+					break;
+				case DraggablePlane.XZ:
+					break;
+				case DraggablePlane.YZ:
+					for (int i = 0; i < verts.Length; i++) {
+						float tmp = verts [i].x;
+						verts [i].x = verts [i].y;
+						verts [i].y = tmp;
+					}
+					break;
+				}
 
-	public bool YEnabled;
+				draggingPlane = value;
 
-	public bool ZEnabled;
 
-	public int XSnapDistance;
+				switch (draggingPlane) {
+				case DraggablePlane.XY:
+					for (int i = 0; i < verts.Length; i++) {
+						float tmp = verts [i].z;
+						verts [i].z = verts [i].y;
+						verts [i].y = tmp;
+					}
+					break;
+				case DraggablePlane.XZ:
+					break;
+				case DraggablePlane.YZ:
+					for (int i = 0; i < verts.Length; i++) {
+						float tmp = verts [i].x;
+						verts [i].x = verts [i].y;
+						verts [i].y = tmp;
+					}
+					break;
+				}
+			}
+		}
+	}
 
-	public int YSnapDistance;
+	List<Vector3> allowedPoints;
+	public void SetAllowedPoints (Vector3[] points)
+	{
+		allowedPoints = new List<Vector3> (points);
+	}
 
-	public int ZSnapDistance;
+
+	Vector3 saved;
 
 	public bool IsDragging
 	{ 
@@ -29,16 +87,17 @@ public class Draggable : MonoBehaviour {
 	public event MovingHandler Moving;
 	public event MovingHandler EndMoving;
 
-
+	public bool Enabled = true;
 
 
 	Collider _collider = null;
-	Vector3 unsnappedPosition;
+	//Vector3 unsnappedPosition;
 
+	Vector3 savedPosition;
 	Vector3 startPosition;
 	float distance;
 
-	Vector3 offsetToGrid;
+	//Vector3 offsetToGrid;
 	bool startedMoving = false;
 	// Use this for initialization
 	void Start () {
@@ -50,7 +109,7 @@ public class Draggable : MonoBehaviour {
 			Debug.Log ("No collider found on this object");
 		}
 	}
-		
+
 
 	// Update is called once per frame
 	void Update () {
@@ -72,48 +131,64 @@ public class Draggable : MonoBehaviour {
 
 			if (Input.GetMouseButtonDown (0)) {
 				if (isMouseOver) {
-					unsnappedPosition = transform.position;
-					offsetToGrid = snapToGrid (unsnappedPosition) - unsnappedPosition;
-					//startPosition = snapToGrid (pos);
-					startPosition = pos;
+					//unsnappedPosition = transform.position;
+					//offsetToGrid = snapToGrid (unsnappedPosition) - unsnappedPosition;
+					saved = transform.position;
+					startPosition = snapToGrid (pos);
+//					startPosition = pos;
 					distance = dst;
 					if (StartMoving != null)
 						StartMoving (gameObject, startPosition, startPosition);
+//					saved = startPosition;
 					startedMoving = true;
 				}
 			} else if (Input.GetMouseButton (0) && startedMoving) {
 				IsDragging = true;
 				Vector3 mouseCurrentPosition = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance));
-				//mouseCurrentPosition = snapToGrid (mouseCurrentPosition);
+				mouseCurrentPosition = snapToGrid (mouseCurrentPosition);
 			
 				Vector3 dif = mouseCurrentPosition - startPosition;
-		
+				saved += dif;
+				transform.position = saved;
+				startPosition = mouseCurrentPosition;
+				
 				//dif = snapToGrid (dif);
 
 
-				unsnappedPosition += dif;
+				//unsnappedPosition += dif;
 
-				Vector3 tmp = snapToGrid (unsnappedPosition);
-				if (!XEnabled)
-					tmp.x = startPosition.x;
-				if (!YEnabled)
-					tmp.y = startPosition.y;
-				if (!ZEnabled)
-					tmp.z = startPosition.z;
-				tmp += offsetToGrid;
-				if (Moving != null && (tmp - transform.position).sqrMagnitude > 0.00001f)
-					Moving (gameObject, transform.position, tmp);
+//				Vector3 tmp = snapToGrid (unsnappedPosition);
+//				if (!XEnabled)
+//					tmp.x = startPosition.x;
+//				if (!YEnabled)
+//					tmp.y = startPosition.y;
+//				if (!ZEnabled)
+//					tmp.z = startPosition.z;
+//				tmp += offsetToGrid;
+
+
+
+				if (Moving != null && dif.sqrMagnitude > 0.00001f)
+					Moving (gameObject, startPosition - dif, startPosition);
 				
 
 				//transform.position = snapToGrid (transform.position);
-				if (XEnabled)
-					startPosition.x = mouseCurrentPosition.x;
-				if (YEnabled)
-					startPosition.y = mouseCurrentPosition.y;
-				if (ZEnabled)
-					startPosition.z = mouseCurrentPosition.z;
+//				if (XEnabled)
+//					startPosition.x = mouseCurrentPosition.x;
+//				if (YEnabled)
+//					startPosition.y = mouseCurrentPosition.y;
+//				if (ZEnabled)
+//					startPosition.z = mouseCurrentPosition.z;
 
 			} else if (Input.GetMouseButtonUp (0) && startedMoving) {
+
+//				if (FreezeX)
+//					startPosition.x = saved.x;
+//				if (FreezeY)
+//					startPosition.y = saved.y;
+//				if (FreezeZ)
+//					startPosition.x = saved.z;
+
 
 				startedMoving = false;
 				IsDragging = false;
@@ -128,57 +203,15 @@ public class Draggable : MonoBehaviour {
 
 	Vector3 snapToGrid(Vector3 pos)
 	{
-//		if (XEnabled) {
-//			int divx = (int)((pos.x + 0.5f) / XSnapDistance);
-//			divx *= XSnapDistance;
-//
-//			if (Mathf.Abs (divx - pos.x) < Mathf.Abs (divx + XSnapDistance - pos.x))
-//				pos.x = divx;
-//			else
-//				pos.x = divx + XSnapDistance;
-//		}
-//
-//
-//		if (YEnabled) {
-//			int divy = (int)((pos.y + 0.5f) / YSnapDistance);
-//			divy *= YSnapDistance;
-//
-//			if (Mathf.Abs (divy - pos.y) < Mathf.Abs (divy + YSnapDistance - pos.y))
-//				pos.y = divy;
-//			else
-//				pos.y = divy + YSnapDistance;
-//		}
-//
-//
-//		if (ZEnabled) {
-//			int divz = (int)((pos.z + 0.5f) / ZSnapDistance);
-//			divz *= ZSnapDistance;
-//
-//			if (Mathf.Abs (divz - pos.z) < Mathf.Abs (divz + ZSnapDistance - pos.z))
-//				pos.z = divz;
-//			else
-//				pos.z = divz + ZSnapDistance;
-//		}
-//		
-//		return pos;
-
-
-		int divx = (int)((pos.x > 0 ? pos.x + 0.5f * XSnapDistance : pos.x - 0.5f * XSnapDistance) / XSnapDistance);
-		divx *= XSnapDistance;
-		int divy = (int)((pos.y > 0 ? pos.y + 0.5f * YSnapDistance : pos.y - 0.5f * YSnapDistance) / YSnapDistance);
-		divy *= YSnapDistance;
-		int divz = (int)((pos.z > 0 ? pos.z + 0.5f * ZSnapDistance : pos.z - 0.5f * ZSnapDistance) / ZSnapDistance);
-		divz *= ZSnapDistance;
-
-		if (XEnabled && XSnapDistance != 0)
-			pos.x = divx;
-		if (YEnabled && YSnapDistance != 0)
-			pos.y = divy;
-		if (ZEnabled && ZSnapDistance != 0)
-			pos.z = divz;
-
-		return pos;
-
-
+		float dst = float.MaxValue;
+		Vector3 output = pos;
+		for (int i = 0; i < allowedPoints.Count; i++) {
+			float det = (allowedPoints [i] - pos).sqrMagnitude;
+			if (dst > det) {
+				dst = det;
+				output = allowedPoints [i];
+			}
+		}
+		return output;
 	}
 }
